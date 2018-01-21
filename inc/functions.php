@@ -74,14 +74,25 @@ function theme_styles() {
 	$min = theme_js_css_suffix();
 	$t   = theme();
 
-	// Enqueue the Fonts URL.
-	wp_enqueue_style( 'main-fonts', theme_fonts_url(), array(), null );
-
-	// Enqueue the stylesheet.
-	wp_enqueue_style(
+	wp_register_style(
 		'main-style',
-		get_stylesheet_directory_uri() . "/assets/css/main{$min}.css",
+		get_template_directory_uri() . "/assets/css/main{$min}.css",
 		array(),
+		$t->version
+	);
+
+	wp_register_style(
+		'main-fonts',
+		theme_fonts_url(),
+		array(),
+		null
+	);
+
+	// Enqueue the stylesheets.
+	wp_enqueue_style(
+		'main-blocks',
+		get_template_directory_uri() . "/assets/css/blocks{$min}.css",
+		array( 'main-fonts', 'main-style' ),
 		$t->version
 	);
 }
