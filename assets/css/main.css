@@ -866,6 +866,87 @@ body:not(.has-header-image) .custom-header-media {
 	vertical-align: bottom;
 }
 
+@media screen and (min-width: 48em) {
+	.has-header-image.front-page .site-branding,
+	.has-header-image.home.blog .site-branding {
+		bottom: 0;
+		display: block;
+		left: 0;
+		height: auto;
+		padding-top: 0;
+		position: absolute;
+		width: 100%;
+	}
+
+	.has-header-image.front-page .custom-header,
+	.has-header-image.home.blog .custom-header {
+		display: block;
+		height: auto;
+	}
+
+	.custom-header-media {
+		height: 165px;
+		position: relative;
+	}
+
+	.front-page.has-header-image .custom-header-media,
+	.home.blog.has-header-image .custom-header-media {
+		height: 0;
+		position: relative;
+	}
+
+	.has-header-image:not(.front-page):not(.home) .custom-header-media {
+		bottom: 0;
+		height: auto;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	.custom-logo-link {
+		padding-right: 2em;
+	}
+
+	.site-title {
+		font-size: 36px;
+		font-size: 2.25rem;
+	}
+
+	.site-description {
+		font-size: 16px;
+		font-size: 1rem;
+	}
+
+	.front-page.has-header-image .site-branding,
+	.home.blog.has-header-image .site-branding {
+		margin-bottom: 70px;
+	}
+
+	.front-page.has-header-image .custom-header-media,
+	.home.blog.has-header-image .custom-header-media {
+		height: 1200px;
+		height: 100vh;
+		max-height: 100%;
+		overflow: hidden;
+	}
+
+	.front-page.has-header-image .custom-header-media:before,
+	.home.blog.has-header-image .custom-header-media:before {
+		height: 33%;
+	}
+
+	.admin-bar.front-page.has-header-image .custom-header-media,
+	.admin-bar.home.blog.has-header-image .custom-header-media {
+		height: calc(100vh - 32px);
+	}
+}
+
+.site-content {
+	background-color: #fff;
+	position: relative;
+}
+
 /*--------------------------------------------------------------
 ## Posts and pages
 --------------------------------------------------------------*/

@@ -37,3 +37,5 @@
 			?>
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->
+
+	<div class="site-content">
