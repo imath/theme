@@ -373,6 +373,20 @@ table {
 	width: 100%;
 }
 
+.wrap {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 800px;
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+.wrap:after {
+	clear: both;
+	content: "";
+	display: block;
+}
+
 /*--------------------------------------------------------------
 # Forms
 --------------------------------------------------------------*/
@@ -486,6 +500,21 @@ a:hover, a:active {
 /*--------------------------------------------------------------
 ## Menus
 --------------------------------------------------------------*/
+
+.navigation-top {
+	background: #fff;
+	border-bottom: 1px solid #eee;
+	border-top: 1px solid #eee;
+	font-size: 16px;
+	font-size: 1rem;
+	position: relative;
+}
+
+.navigation-top .wrap {
+	max-width: 1000px;
+	padding: 0;
+}
+
 .main-navigation {
 	display: block;
 	width: 100%;
@@ -494,8 +523,10 @@ a:hover, a:active {
 .main-navigation ul {
 	display: none;
 	list-style: none;
+	background: #fff;
 	margin: 0;
-	padding-left: 0;
+	padding: 0 1.5em;
+	text-align: left;
 }
 
 .main-navigation ul ul {
@@ -528,12 +559,23 @@ a:hover, a:active {
 }
 
 .main-navigation li {
+	border-bottom: 1px solid #eee;
 	position: relative;
+}
+
+.main-navigation li li,
+.main-navigation li:last-child {
+	border: 0;
 }
 
 .main-navigation a {
 	display: block;
+	padding: 0.5em 0;
 	text-decoration: none;
+}
+
+.main-navigation a:hover {
+	color: #767676;
 }
 
 /* Small menu. */
@@ -548,6 +590,25 @@ a:hover, a:active {
 	}
 	.main-navigation ul {
 		display: flex;
+	}
+
+	.navigation-top .wrap {
+		max-width: 1000px;
+		padding-left: 3em;
+		padding-right: 3em;
+	}
+
+	.main-navigation li {
+		border: 0;
+		display: inline-block;
+	}
+
+	.main-navigation li li {
+		display: block;
+	}
+
+	.main-navigation a {
+		padding: 1em 1.25em;
 	}
 }
 
@@ -758,7 +819,7 @@ body.has-header-image.home.blog.wp-custom-logo .custom-logo-link {
 .has-header-image.home.blog.wp-custom-logo .site-branding,
 .has-header-video.home.blog.wp-custom-logo .site-branding {
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
-	bottom: 15%;
+	bottom: 5%;
 }
 
 .custom-logo-link a:hover,
@@ -866,7 +927,11 @@ body:not(.has-header-image) .custom-header-media {
 	vertical-align: bottom;
 }
 
-@media screen and (min-width: 48em) {
+@media screen and (min-width: 37.5em) {
+	#masthead .custom-header .wrap {
+		padding-left: 0;
+	}
+
 	.has-header-image.front-page .site-branding,
 	.has-header-image.home.blog .site-branding {
 		bottom: 0;
@@ -881,7 +946,12 @@ body:not(.has-header-image) .custom-header-media {
 	.has-header-image.front-page .custom-header,
 	.has-header-image.home.blog .custom-header {
 		display: block;
-		height: auto;
+		height: calc(100vh - 58px);
+	}
+
+	.has-header-image.front-page.admin-bar .custom-header,
+	.has-header-image.home.blog.admin-bar .custom-header {
+		height: calc(100vh - 90px);
 	}
 
 	.custom-header-media {
@@ -942,9 +1012,17 @@ body:not(.has-header-image) .custom-header-media {
 	}
 }
 
+/*--------------------------------------------------------------
+## Regular content
+--------------------------------------------------------------*/
+
 .site-content {
 	background-color: #fff;
 	position: relative;
+}
+
+.site-content {
+	padding: 1.5em 0 0;
 }
 
 /*--------------------------------------------------------------

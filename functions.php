@@ -77,7 +77,7 @@ final class Theme {
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
-			'superieur' => esc_html__( 'Supérieur', 'theme' ),
+			'navigation-top' => esc_html__( 'Navigation Supérieure', 'theme' ),
 		) );
 
 		/*
