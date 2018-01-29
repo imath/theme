@@ -1030,6 +1030,8 @@ body:not(.has-header-image) .custom-header-media {
 .site-content {
 	background-color: #fff;
 	position: relative;
+	font-size: 16px;
+    line-height: 1.8;
 }
 
 .site-content {
@@ -1093,6 +1095,42 @@ body:not(.has-header-image) .custom-header-media {
 
 .bypostauthor {
 	display: block;
+}
+
+ol.comment-list,
+ol.comment-list ol {
+	margin: 0;
+	list-style: none;
+	padding-left: 0;
+}
+
+ol.comment-list li{
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.comment-author {
+	font-size: 16px;
+	font-size: 1rem;
+	margin-bottom: 0.4em;
+	position: relative;
+	z-index: 2;
+}
+
+.comment-author .avatar {
+	height: 50px;
+	left: -65px;
+	position: absolute;
+	width: 50px;
+	border-radius: 50%;
+}
+
+.comment-author .says {
+	display: none;
+}
+
+.comment-metadata > a {
+	box-shadow: none;
 }
 
 /*--------------------------------------------------------------

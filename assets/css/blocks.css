@@ -17,7 +17,8 @@
 .wp-block-pullquote,
 .wp-block-preformatted,
 .wp-block-code,
-.wp-block-verse {
+.wp-block-verse,
+.wp-block-gutenblocks-photo {
   margin: 1.5em auto;
   max-width: 740px;
   padding-left: 20px;
@@ -33,6 +34,12 @@
 
 .wp-block-video video {
   max-width: 740px;
+}
+
+.wp-block-quote:not(.is-large) {
+	border-left: 4px solid #000;
+	padding-left: 1em;
+	color: #767676;
 }
 
 .wp-block-cover-text.alignwide,
