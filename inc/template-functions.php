@@ -40,3 +40,11 @@ function theme_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'theme_pingback_header' );
+
+function theme_get_thumbnail_credit( $attr, WP_Post $attachment ) {
+	if ( ! empty( $attachment->post_content ) ) {
+		theme()->thumbnail_overlay = $attachment->post_content;
+	}
+
+	return $attr;
+}

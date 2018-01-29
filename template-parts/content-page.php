@@ -10,11 +10,13 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<div class="wrap">
-			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-		</div><!-- .wrap -->
-	</header><!-- .entry-header -->
+	<?php if ( ! is_front_page() ) : ?>
+		<header class="entry-header">
+			<div class="wrap">
+				<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+			</div><!-- .wrap -->
+		</header><!-- .entry-header -->
+	<?php endif ; ?>
 
 	<?php theme_post_thumbnail(); ?>
 

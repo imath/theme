@@ -16,12 +16,12 @@
 				<div class="wrap">
 					<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'theme' ) ); ?>"><?php
 						/* translators: %s: CMS name, i.e. WordPress. */
-						printf( esc_html__( 'Proudly powered by %s', 'theme' ), 'WordPress' );
+						printf( esc_html__( 'Fièrement propulsé par %s', 'theme' ), 'WordPress' );
 					?></a>
 					<span class="sep"> | </span>
 					<?php
 						/* translators: 1: Theme name, 2: Theme author. */
-						printf( esc_html__( 'Theme: %1$s by %2$s.', 'theme' ), 'theme', '<a href="https://automattic.com/">Automattic</a>' );
+						printf( esc_html__( 'Thème: %1$s de %2$s.', 'theme' ), '<i>Thème</i>', '<a href="https://imathi.eu/">imath</a>' );
 					?>
 				</div><!-- .wrap -->
 			</div><!-- .site-info -->

@@ -113,25 +113,33 @@ function theme_post_thumbnail() {
 		return;
 	}
 
+	$theme = theme();
+
 	if ( is_singular() ) :
+		// Add a temporary filter intercept the attachment object
+		add_filter( 'wp_get_attachment_image_attributes', 'theme_get_thumbnail_credit', 10, 2 );
 	?>
 
 	<div class="post-thumbnail">
 		<?php the_post_thumbnail(); ?>
+
+		<?php if ( ! empty( $theme->thumbnail_overlay ) ) : ?>
+			<small class="post-thumbnail-overlay">
+				<?php echo apply_filters( 'the_content', $theme->thumbnail_overlay ) ; ?>
+			</small>
+		<?php endif ; ?>
 	</div><!-- .post-thumbnail -->
 
-	<?php else : ?>
+	<?php
+		// Remove the filter we used to intercept the attachment object
+		remove_filter( 'wp_get_attachment_image_attributes', 'thaim_get_thumbnail_credit', 10, 2 );
+
+	else : ?>
 
 	<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true">
-		<?php
-			the_post_thumbnail( 'post-thumbnail', array(
-				'alt' => the_title_attribute( array(
-					'echo' => false,
-				) ),
-			) );
-		?>
+		<?php the_post_thumbnail( 'post-thumbnail', array( 'alt' => the_title_attribute( 'echo=0' ) ) ); ?>
 	</a>
 
-	<?php endif; // End is_singular().
+	<?php endif; // End is_singular()
 }
 endif;
