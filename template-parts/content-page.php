@@ -11,7 +11,9 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+		<div class="wrap">
+			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+		</div><!-- .wrap -->
 	</header><!-- .entry-header -->
 
 	<?php theme_post_thumbnail(); ?>
@@ -29,24 +31,26 @@
 
 	<?php if ( get_edit_post_link() ) : ?>
 		<footer class="entry-footer">
-			<?php
-				edit_post_link(
-					sprintf(
-						wp_kses(
-							/* translators: %s: Name of current post. Only visible to screen readers */
-							__( 'Edit <span class="screen-reader-text">%s</span>', 'theme' ),
-							array(
-								'span' => array(
-									'class' => array(),
-								),
-							)
+			<div class="wrap">
+				<?php
+					edit_post_link(
+						sprintf(
+							wp_kses(
+								/* translators: %s: Name of current post. Only visible to screen readers */
+								__( 'Edit <span class="screen-reader-text">%s</span>', 'theme' ),
+								array(
+									'span' => array(
+										'class' => array(),
+									),
+								)
+							),
+							get_the_title()
 						),
-						get_the_title()
-					),
-					'<span class="edit-link">',
-					'</span>'
-				);
-			?>
+						'<span class="edit-link">',
+						'</span>'
+					);
+				?>
+			</div><!-- .wrap -->
 		</footer><!-- .entry-footer -->
 	<?php endif; ?>
 </article><!-- #post-<?php the_ID(); ?> -->
