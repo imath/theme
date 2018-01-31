@@ -5,12 +5,33 @@
  * navigation support for dropdown menus.
  */
 ( function() {
-	var container, button, menu, links, i, len;
+	var nav, container, button, menu, links, i, len, menuToggle;
 
 	container = document.getElementById( 'site-navigation' );
 	if ( ! container ) {
 		return;
 	}
+
+	nav = document.querySelectorAll( '#masthead .navigation-top' );
+	menuToggle = document.querySelectorAll( '#site-navigation .menu-toggle' );
+
+	window.onscroll = function() {
+		if ( 'none' !== window.getComputedStyle( menuToggle[0], null ).getPropertyValue( 'display' ) ) {
+			return;
+		}
+
+		var cL = nav[0].classList;
+
+		if ( window.scrollY >= nav[0].offsetTop ) {
+			if ( ! cL.contains( 'site-navigation-fixed' ) ) {
+				cL.add( 'site-navigation-fixed' )
+			}
+		} else {
+			if ( cL.contains( 'site-navigation-fixed' ) ) {
+				cL.remove( 'site-navigation-fixed' )
+			}
+		}
+	};
 
 	button = container.getElementsByTagName( 'button' )[0];
 	if ( 'undefined' === typeof button ) {
