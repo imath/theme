@@ -5,7 +5,7 @@
  * navigation support for dropdown menus.
  */
 ( function() {
-	var nav, container, button, menu, links, i, len, menuToggle;
+	var nav, header, container, button, menu, links, i, len, menuToggle;
 
 	container = document.getElementById( 'site-navigation' );
 	if ( ! container ) {
@@ -13,6 +13,7 @@
 	}
 
 	nav = document.querySelectorAll( '#masthead .navigation-top' );
+	header = document.getElementById( 'masthead' );
 	menuToggle = document.querySelectorAll( '#site-navigation .menu-toggle' );
 
 	window.onscroll = function() {
@@ -22,7 +23,7 @@
 
 		var cL = nav[0].classList;
 
-		if ( window.scrollY >= nav[0].offsetTop ) {
+		if ( window.pageYOffset >= header.clientHeight - nav[0].clientHeight ) {
 			if ( ! cL.contains( 'site-navigation-fixed' ) ) {
 				cL.add( 'site-navigation-fixed' )
 			}

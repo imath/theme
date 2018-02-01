@@ -78,7 +78,11 @@
 
 .wp-block-image img {
   display: block;
-  width: 100%;
+  max-width: 100%;
+}
+
+.wp-block-image.aligncenter img {
+	margin: 0 auto;
 }
 
 .wp-block-gallery:not(.components-placeholder) {
