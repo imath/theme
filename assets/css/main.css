@@ -1110,7 +1110,7 @@ body:not(.has-header-image) .custom-header-media {
 	margin: 0 0 1.5em;
 }
 
-.post-thumbnail {
+.site-content .post-thumbnail {
 	display: block;
 	max-width: 1000px;
 	padding: 0 2em;
@@ -1118,12 +1118,13 @@ body:not(.has-header-image) .custom-header-media {
 	box-shadow: none;
 }
 
-.post-thumbnail img {
+.site-content .post-thumbnail img {
 	display: block;
 	margin: 0 auto;
 }
 
-.post-thumbnail-overlay {
+
+.site-content .post-thumbnail-overlay {
 	text-align: center;
 }
 
