@@ -1105,6 +1105,10 @@ body:not(.has-header-image) .custom-header-media {
 	margin: 1.5em 0 0;
 }
 
+.entry-content p {
+	text-align: justify;
+}
+
 .page-links {
 	clear: both;
 	margin: 0 0 1.5em;
@@ -1218,8 +1222,10 @@ object {
 ## Captions
 --------------------------------------------------------------*/
 .wp-caption {
-	margin-bottom: 1.5em;
-	max-width: 100%;
+	margin: 1.5em auto;
+	max-width: 740px !important;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 .wp-caption img[class*="wp-image-"] {
