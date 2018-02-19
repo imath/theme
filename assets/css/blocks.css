@@ -18,7 +18,8 @@
 .wp-block-preformatted,
 .wp-block-code,
 .wp-block-verse,
-.wp-block-gutenblocks-photo {
+.wp-block-gutenblocks-photo,
+.wp-block-columns {
   margin: 1.5em auto;
   max-width: 740px;
   padding-left: 20px;
@@ -54,7 +55,8 @@
 .wp-block-pullquote.alignwide,
 .wp-block-preformatted.alignwide,
 .wp-block-code.alignwide,
-.wp-block-verse.alignwide {
+.wp-block-verse.alignwide,
+.wp-block-columns.alignwide  {
   margin: 1.5em auto;
   max-width: 1100px;
 }
@@ -71,7 +73,8 @@
 .wp-block-pullquote.alignefull,
 .wp-block-preformatted.alignefull,
 .wp-block-code.alignefull,
-.wp-block-verse.alignefull {
+.wp-block-verse.alignefull,
+.wp-block-columns.alignefull {
   margin: 1.5em 0;
   max-width: 100%;
 }
