@@ -145,3 +145,17 @@ function theme_widgets_init() {
 	) );
 }
 add_action( 'widgets_init', 'theme_widgets_init' );
+
+/**
+ * Use front-page.php when Front page displays is set to a static page.
+ *
+ * @since Twenty Seventeen 1.0
+ *
+ * @param string $template front-page.php.
+ *
+ * @return string The template to be used: blank if is_home() is true (defaults to index.php), else $template.
+ */
+function theme_front_page_template( $template ) {
+	return is_home() ? '' : $template;
+}
+add_filter( 'frontpage_template', 'theme_front_page_template' );

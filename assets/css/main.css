@@ -1096,6 +1096,16 @@ body:not(.has-header-image) .custom-header-media {
 }
 
 /*--------------------------------------------------------------
+## Front Page hero sections
+--------------------------------------------------------------*/
+
+body.front-page article.theme-hero:nth-child(even) {
+	background-color: #00AA8D;
+	color: #FFF;
+	padding: 1.5em 0;
+}
+
+/*--------------------------------------------------------------
 ## Posts and pages
 --------------------------------------------------------------*/
 .sticky {
