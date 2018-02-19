@@ -116,8 +116,7 @@ final class Theme {
 		add_theme_support( 'gutenberg', array(
 			'wide-images' => true,
 			'colors'      => array(
-				'#0073aa',
-				'#229fd8',
+				'#00AA8D',
 				'#eee',
 				'#444',
 			),
