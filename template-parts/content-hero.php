@@ -6,17 +6,15 @@
  */
 ?>
 <article id="hero<?php echo theme()->hero_counter; ?>" <?php post_class( 'theme-hero ' ); ?> >
+	<div class="wrap">
 
-	<?php if ( has_post_thumbnail() ) : ?>
+		<?php if ( has_post_thumbnail() ) : ?>
+			<div class="hero-image">
+					<?php theme_post_thumbnail( array( 'hero' ), 'thumbnail' ); ?>
+			</div><!-- .hero-image -->
+		<?php endif; ?>
 
-		<div class="hero-image wrap">
-				<?php theme_post_thumbnail(); ?>
-		</div><!-- .hero-image -->
-
-	<?php endif; ?>
-
-	<div class="hero-content">
-		<div class="wrap">
+		<div class="hero-content">
 			<header class="entry-header">
 				<?php the_title( '<h2 class="entry-title">', '</h2>' ); ?>
 			</header><!-- .entry-header -->
@@ -32,7 +30,7 @@
 					);
 				?>
 			</div><!-- .entry-content -->
-		</div><!-- .wrap -->
-	</div><!-- .hero-content -->
+		</div><!-- .hero-content -->
+	</div><!-- .wrap -->
 
 </article><!-- #hero<?php echo theme()->hero_counter; ?> -->

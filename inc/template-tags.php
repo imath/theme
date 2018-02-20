@@ -108,36 +108,44 @@ if ( ! function_exists( 'theme_post_thumbnail' ) ) :
  * Wraps the post thumbnail in an anchor element on index views, or a div
  * element when on single views.
  */
-function theme_post_thumbnail() {
+function theme_post_thumbnail( $classes = array(), $size = 'post-thumbnail' ) {
 	if ( post_password_required() || is_attachment() || ! has_post_thumbnail() ) {
 		return;
 	}
 
-	$theme = theme();
+	$theme   = theme();
+	$classes = array_merge( (array) $classes, array( 'post-thumbnail' ) );
+	$classes = array_map( 'sanitize_html_class', $classes );
 
 	if ( is_singular() ) :
 		// Add a temporary filter intercept the attachment object
 		add_filter( 'wp_get_attachment_image_attributes', 'theme_get_thumbnail_credit', 10, 2 );
-	?>
 
-	<div class="post-thumbnail">
-		<?php the_post_thumbnail(); ?>
+		$thumbnail = get_the_post_thumbnail( null, $size, '' );
 
-		<?php if ( ! empty( $theme->thumbnail_overlay ) ) : ?>
-			<small class="post-thumbnail-overlay">
-				<?php echo apply_filters( 'the_content', $theme->thumbnail_overlay ) ; ?>
-			</small>
-		<?php endif ; ?>
-	</div><!-- .post-thumbnail -->
+		if ( false !== strpos( $thumbnail, 'srcset' ) ) {
+			$classes[] = 'has-srcset';
+		}
+		?>
 
-	<?php
+		<div class="<?php echo join( ' ', $classes ); ?>">
+			<?php echo $thumbnail; ?>
+
+			<?php if ( ! empty( $theme->thumbnail_overlay ) ) : ?>
+				<small class="post-thumbnail-overlay">
+					<?php echo apply_filters( 'the_content', $theme->thumbnail_overlay ) ; ?>
+				</small>
+			<?php endif ; ?>
+		</div><!-- .post-thumbnail -->
+
+		<?php
 		// Remove the filter we used to intercept the attachment object
 		remove_filter( 'wp_get_attachment_image_attributes', 'thaim_get_thumbnail_credit', 10, 2 );
 
 	else : ?>
 
 	<a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true">
-		<?php the_post_thumbnail( 'post-thumbnail', array( 'alt' => the_title_attribute( 'echo=0' ) ) ); ?>
+		<?php the_post_thumbnail( $size, array( 'alt' => the_title_attribute( 'echo=0' ) ) ); ?>
 	</a>
 
 	<?php endif; // End is_singular()
