@@ -1147,6 +1147,14 @@ body.front-page article.theme-hero:nth-child(even) .hero-content a:hover {
 }
 
 /*--------------------------------------------------------------
+## Archive Loops
+--------------------------------------------------------------*/
+body.archive .page-header {
+	padding: 1em 0;
+	border-bottom: solid 1px #23282d;
+}
+
+/*--------------------------------------------------------------
 ## Posts and pages
 --------------------------------------------------------------*/
 .sticky {
