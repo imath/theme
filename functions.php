@@ -113,14 +113,14 @@ final class Theme {
 			'flex-height' => true,
 		) );
 
-		add_theme_support( 'gutenberg', array(
-			'wide-images' => true,
-			'colors'      => array(
-				'#23282d',
-				'#eee',
-				'#444',
-			),
-		) );
+		// Gutenberg Theme features
+		add_theme_support( 'editor-color-palette',
+			'#23282d',
+			'#eee',
+			'#444'
+		);
+
+		add_theme_support( 'align-wide' );
 	}
 
 	/**
