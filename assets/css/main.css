@@ -1179,6 +1179,19 @@ body.archive .page-header {
 	text-align: justify;
 }
 
+.entry-content a.more-link {
+	display: block;
+	margin: 1.5em auto;
+	max-width: 740px;
+	box-shadow: none;
+	text-decoration: underline;
+	text-underline-position: under;
+}
+
+.entry-content a.more-link:after {
+	content: " →";
+}
+
 .page-links {
 	clear: both;
 	margin: 0 0 1.5em;
@@ -1197,7 +1210,7 @@ body.archive .page-header {
 	margin: 0 auto;
 }
 
-.site-content article:not(.theme-hero) .post-thumbnail.has-srcset{
+body.front-page .site-content article:not(.theme-hero) .post-thumbnail.has-srcset{
 	display: none;
 }
 
