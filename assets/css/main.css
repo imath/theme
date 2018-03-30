@@ -1214,8 +1214,8 @@ body.archive .page-header {
 	box-shadow: none;
 }
 
-body.page .post-thumbnail img {
-	background-color: #23282d;
+body.page.entrepot .post-thumbnail {
+	display: none;
 }
 
 .site-content .post-thumbnail img {

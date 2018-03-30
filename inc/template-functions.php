@@ -15,6 +15,8 @@ function theme_body_classes( $classes ) {
 	// Adds a class of hfeed to non-singular pages.
 	if ( ! is_singular() ) {
 		$classes[] = 'hfeed';
+	} else {
+		$classes[] = get_post_field( 'post_name' );
 	}
 
 	// Add class on front page.
