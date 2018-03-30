@@ -602,7 +602,7 @@ a:hover, a:active {
 		display: none;
 	}
 	.main-navigation ul {
-		display: flex;
+		display: block;
 	}
 
 	.navigation-top .wrap {
@@ -643,6 +643,15 @@ a:hover, a:active {
 
 	.admin-bar .site-navigation-fixed.navigation-top {
 		top: 32px;
+	}
+
+	.main-navigation .nav-menu li.last {
+		float: right;
+		display: none;
+	}
+
+	.site-navigation-fixed .main-navigation .nav-menu li.last {
+		display: block;
 	}
 }
 
@@ -1203,6 +1212,10 @@ body.archive .page-header {
 	padding: 0 2em;
 	margin: 1em auto 0;
 	box-shadow: none;
+}
+
+body.page .post-thumbnail img {
+	background-color: #23282d;
 }
 
 .site-content .post-thumbnail img {

@@ -93,3 +93,68 @@ function theme_hero_count() {
 
 	return $hero_count;
 }
+
+/**
+ * Get the output for a SVG icon.
+ *
+ * @param array  $attrs The SVG icon attributes.
+ * @param string $width The SVG icon width in pixels.
+ * @param string $height The SVG icon height in pixels.
+ * @return string HTML Output.
+ */
+function theme_get_icon( $attrs = array(), $width = 20, $height = 20 ) {
+	$attributes = '';
+	foreach( $attrs as $att => $v ) {
+		$attributes .= sprintf( ' %1$s="%2$s"', sanitize_key( $att ), esc_attr( $v ) );
+	}
+
+	return sprintf( '<svg class="icon" role="img" width="%1$dpx" height="%2$dpx"><path%3$s/></svg>',
+		intval( $width ),
+		intval( $height ),
+		$attributes
+	);
+}
+
+/**
+ * Get the Twitter action link for the current page.
+ *
+ * @param string $url The matching href attribute's value.
+ * @return string The Twitter action link.
+ */
+function theme_get_twitter_link( $url = '' ) {
+	return sprintf( 'https://twitter.com/intent/tweet?original_referer=%1$s&amp;source=tweetbutton&amp;text=%2$s&amp;url=%1$s&amp;via=%3$s',
+		urlencode( get_permalink() ),
+		urlencode( get_the_title() ),
+		esc_attr( get_bloginfo( 'name' ) )
+	);
+}
+
+/**
+ * Display SVG icons in menu.
+ *
+ * @param  string  $item_output The menu item output.
+ * @param  WP_Post $item        Menu item object.
+ * @param  int     $depth       Depth of the menu.
+ * @param  array   $args        wp_nav_menu() arguments.
+ * @return string  $item_output The menu item output with social icon.
+ */
+function theme_navigation_menu_icons( $item_output, $item, $depth, $args ) {
+	// Get supported icons.
+	$icons = theme_icons();
+
+	// Change SVG icon inside menu if there is supported URL.
+	if ( 'navigation-top' === $args->theme_location ) {
+		foreach ( $icons as $key => $attrs ) {
+			if ( false !== strpos( $item_output, $key ) ) {
+				if ( 'twitter.com' === $key ) {
+					$item_output = preg_replace_callback( '/(?<=href=\").+(?=\")/', 'theme_get_twitter_link', $item_output );
+				}
+
+				$item_output = str_replace( $item->title, theme_get_icon( $attrs ), $item_output );
+			}
+		}
+	}
+
+	return $item_output;
+}
+add_filter( 'walker_nav_menu_start_el', 'theme_navigation_menu_icons', 10, 4 );
