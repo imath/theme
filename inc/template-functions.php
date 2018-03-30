@@ -103,15 +103,25 @@ function theme_hero_count() {
  * @return string HTML Output.
  */
 function theme_get_icon( $attrs = array(), $width = 20, $height = 20 ) {
-	$attributes = '';
-	foreach( $attrs as $att => $v ) {
-		$attributes .= sprintf( ' %1$s="%2$s"', sanitize_key( $att ), esc_attr( $v ) );
+	if ( ! isset( $attrs['paths'] ) ) {
+		$attrs = array( $attrs );
 	}
 
-	return sprintf( '<svg class="icon" role="img" width="%1$dpx" height="%2$dpx"><path%3$s/></svg>',
+	$svg = "\n";
+	foreach ( $attrs as $path ) {
+		$attributes = '';
+		foreach( $path as $att => $v ) {
+			$attributes .= sprintf( ' %1$s="%2$s"', sanitize_key( $att ), esc_attr( $v ) );
+		}
+
+		$svg .= sprintf( '<path%1$s/>%2$s', $attributes, "\n" );
+	}
+
+
+	return sprintf( '<svg class="icon" role="img" width="%1$dpx" height="%2$dpx">%3$s</svg>',
 		intval( $width ),
 		intval( $height ),
-		$attributes
+		$svg
 	);
 }
 
@@ -150,7 +160,11 @@ function theme_navigation_menu_icons( $item_output, $item, $depth, $args ) {
 					$item_output = preg_replace_callback( '/(?<=href=\").+(?=\")/', 'theme_get_twitter_link', $item_output );
 				}
 
-				$item_output = str_replace( $item->title, theme_get_icon( $attrs ), $item_output );
+				$item_output = str_replace(
+					$item->title,
+					theme_get_icon( $attrs ) . '<span class="screen-reader-text">' . $item->title . '</span>',
+					$item_output
+				);
 			}
 		}
 	}
