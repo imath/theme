@@ -95,6 +95,14 @@ function theme_customize_preview_js() {
 }
 add_action( 'customize_preview_init', 'theme_customize_preview_js' );
 
+/**
+ * Load dynamic logic for the customizer controls area.
+ */
+function theme_customize_hero_js() {
+	wp_enqueue_script( 'theme-customizer-controls', get_template_directory_uri() . '/js/customizer-controls.js', array(), '1.0', true );
+}
+add_action( 'customize_controls_enqueue_scripts', 'theme_customize_hero_js' );
+
 function theme_is_static_front_page() {
 	return ( is_front_page() && ! is_home() );
 }

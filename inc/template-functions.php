@@ -19,6 +19,11 @@ function theme_body_classes( $classes ) {
 		$classes[] = get_post_field( 'post_name' );
 	}
 
+	// Add class if we're viewing the Customizer for easier styling of theme options.
+	if ( is_customize_preview() ) {
+		$classes[] = 'theme-customizer';
+	}
+
 	// Add class on front page.
 	if ( is_front_page() && 'posts' !== get_option( 'show_on_front' ) ) {
 		$classes[] = 'front-page';

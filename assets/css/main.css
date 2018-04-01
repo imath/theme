@@ -21,6 +21,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 # Media
 	## Captions
 	## Galleries
+# Customizer
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
 # Normalize
@@ -616,10 +617,10 @@ a:hover, a:active {
 		display: inline-block;
 	}
 
-	.main-navigation ul:first-child > li.current_page_item > a,
-	.main-navigation ul:first-child > li.current-menu-item > a,
-	.main-navigation ul:first-child > li.current-menu-parent > a,
-	.main-navigation ul:first-child > li.current_page_parent > a {
+	.main-navigation ul#main-navigation > li.current_page_item > a,
+	.main-navigation ul#main-navigation > li.current-menu-item > a,
+	.main-navigation ul#main-navigation > li.current-menu-parent > a,
+	.main-navigation ul#main-navigation > li.current_page_parent > a {
 		box-shadow: inset 0 -1px 0 rgba(15, 15, 15, 1);
 	}
 
@@ -627,7 +628,7 @@ a:hover, a:active {
 		display: block;
 	}
 
-	.main-navigation ul:first-child > li > a {
+	.main-navigation ul#main-navigation > li > a {
 		padding: 1em 1.25em;
 	}
 
@@ -1494,4 +1495,56 @@ object {
 
 .gallery-caption {
 	display: block;
+}
+
+/*--------------------------------------------------------------
+# Customizer
+--------------------------------------------------------------*/
+
+.highlight-front-sections.theme-customizer.front-page .theme-hero:after {
+	border: 2px dashed #0085ba; /* Matches visible edit shortcuts. */
+	bottom: 1em;
+	content: "";
+	display: block;
+	left: 1em;
+	position: absolute;
+	right: 1em;
+	top: 1em;
+	z-index: 1;
+}
+
+.highlight-front-sections.theme-customizer.front-page .theme-hero .hero-content {
+	z-index: 2; /* Prevent :after from preventing interactions within the section */
+}
+
+/* Used for placeholder text */
+.theme-customizer.front-page .theme-hero .theme-hero-title {
+	display: block;
+	font-size: 14px;
+	font-size: 0.875rem;
+	font-weight: 700;
+	letter-spacing: 1px;
+	padding: 3em;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+/* Show borders on the custom page panels only when the front page sections are being edited */
+.highlight-front-sections.theme-customizer.front-page .theme-hero:nth-of-type(1):after {
+	border: none;
+}
+
+.theme-customizer.front-page #primary article.hero-placeholder {
+	border: 0;
+}
+
+/* Add some space around the visual edit shortcut buttons. */
+.theme-hero > .customize-partial-edit-shortcut > button {
+	top: 30px;
+	left: 30px;
+}
+
+/* Ensure that placeholder icons are visible. */
+.theme-hero .customize-partial-edit-shortcut-hidden:before {
+	visibility: visible;
 }

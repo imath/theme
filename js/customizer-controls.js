@@ -1,0 +1,20 @@
+/**
+ * File customizer-control.js.
+ *
+ * Theme Customizer enhancements for a better user experience.
+ *
+ * Contains handlers to make Theme Customizer preview reload changes asynchronously.
+ */
+
+( function( $ ) {
+	wp.customize.bind( 'ready', function() {
+		// Detect when the front page sections section is expanded (or closed) so we can adjust the preview accordingly.
+		wp.customize.section( 'theme_options', function( section ) {
+			section.expanded.bind( function( isExpanding ) {
+
+				// Value of isExpanding will = true if you're entering the section, false if you're leaving it.
+				wp.customize.previewer.send( 'section-highlight', { expanded: isExpanding });
+			} );
+		} );
+	} );
+} )( jQuery );
