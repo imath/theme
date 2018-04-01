@@ -1241,6 +1241,10 @@ body.front-page .site-content article:not(.theme-hero) .post-thumbnail.has-srcse
 	margin-right: 0.5em;
 }
 
+.sticky .entry-header .wrap {
+	border-left: solid 4px #23282d;
+}
+
 /*--------------------------------------------------------------
 ## Comments
 --------------------------------------------------------------*/
