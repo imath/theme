@@ -676,7 +676,8 @@ a:hover, a:active {
 	flex: 1 0 50%;
 }
 
-.post-navigation .nav-previous:before {
+.post-navigation .nav-previous:before,
+.posts-navigation .nav-previous:before {
 	content: "← ";
 }
 
@@ -687,7 +688,8 @@ a:hover, a:active {
 	flex: 1 0 50%;
 }
 
-.post-navigation .nav-next:after {
+.post-navigation .nav-next:after,
+.posts-navigation .nav-next:after {
 	content: " →";
 }
 
@@ -1229,6 +1231,14 @@ body.front-page .site-content article:not(.theme-hero) .post-thumbnail.has-srcse
 
 .site-content .post-thumbnail-overlay {
 	text-align: center;
+}
+
+.entry-footer .cat-links,
+.entry-footer .tags-links,
+.entry-footer .comments-link,
+.entry-footer .edit-link {
+	display: inline-block;
+	margin-right: 0.5em;
 }
 
 /*--------------------------------------------------------------
