@@ -14,9 +14,16 @@
 			$( '.site-title a' ).text( to );
 		} );
 	} );
+
 	wp.customize( 'blogdescription', function( value ) {
 		value.bind( function( to ) {
 			$( '.site-description' ).text( to );
+		} );
+	} );
+
+	wp.customize( 'db_error_message', function( value ) {
+		value.bind( function( to ) {
+			$( '#db-error-message' ).text( to );
 		} );
 	} );
 

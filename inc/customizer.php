@@ -66,6 +66,29 @@ function theme_customize_register( $wp_customize ) {
 			)
 		);
 	}
+
+	// Makes sure the DB Error Template is available for preview
+	if ( get_option( 'theme_db_error_id' ) ) {
+		// Theme login section.
+		$wp_customize->add_section( 'theme_db_error', array(
+			'title'    => __( 'Page d’erreur BDD', 'theme' ),
+			'priority' => 135, // After Theme options.
+		) );
+
+		// Allow the admin to enable the login logo
+		$wp_customize->add_setting( 'db_error_message', array(
+			'default'           => __( 'Erreur de connexion à la base de données', 'theme' ),
+			'sanitize_callback' => 'esc_textarea',
+			'transport'         => 'postMessage',
+		) );
+
+		$wp_customize->add_control( 'db_error_message', array(
+			'label'       => __( 'Message d’erreur de la BDD', 'theme' ),
+			'description' => __( 'Personnalisez le message d’erreur de connexion à votre base de données.', 'theme' ),
+			'section'     => 'theme_db_error',
+			'type'        => 'textarea'
+		) );
+	}
 }
 add_action( 'customize_register', 'theme_customize_register' );
 
@@ -91,17 +114,27 @@ function theme_customize_partial_blogdescription() {
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function theme_customize_preview_js() {
-	wp_enqueue_script( 'theme-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20151215', true );
+	wp_enqueue_script( 'theme-customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), theme()->version, true );
 }
 add_action( 'customize_preview_init', 'theme_customize_preview_js' );
 
 /**
  * Load dynamic logic for the customizer controls area.
  */
-function theme_customize_hero_js() {
-	wp_enqueue_script( 'theme-customizer-controls', get_template_directory_uri() . '/js/customizer-controls.js', array(), '1.0', true );
+function theme_customize_control_js() {
+	wp_enqueue_script( 'theme-customizer-controls', get_template_directory_uri() . '/js/customizer-controls.js', array(), theme()->version, true );
+
+	$tpl_ids = array(
+		'email'    => (int) get_option( 'theme_email_id', 0 ),
+		'login'    => (int) get_option( 'theme_login_id', 0 ),
+		'db_error' => (int) get_option( 'theme_db_error_id', 0 ),
+	);
+
+	wp_localize_script( 'theme-customizer-controls', 'themeVars', array(
+		'dbErrorlUrl'  => esc_url_raw( get_permalink( $tpl_ids['db_error'] ) ),
+	) );
 }
-add_action( 'customize_controls_enqueue_scripts', 'theme_customize_hero_js' );
+add_action( 'customize_controls_enqueue_scripts', 'theme_customize_control_js' );
 
 function theme_is_static_front_page() {
 	return ( is_front_page() && ! is_home() );

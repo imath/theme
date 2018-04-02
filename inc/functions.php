@@ -234,6 +234,28 @@ function theme_register_template_post_type() {
 add_action( 'init', 'theme_register_template_post_type' );
 
 /**
+ * Outputs a specific Theme template part.
+ *
+ * @since  1.0.0
+ *
+ * @param  string $part The part for the template to use.
+ * @return string       The output for the template part.
+ */
+function theme_get_template_part( $part = '' ) {
+	if ( ! is_singular( 'theme_tpl' ) || ! $part ) {
+		return '';
+	}
+
+	$template = get_queried_object();
+
+	if ( empty( $template->post_mime_type ) ) {
+		return '';
+	}
+
+	return get_template_part( sprintf( 'template-parts/%s', $template->post_mime_type ), $part );
+}
+
+/**
  * Upgrade the theme db version
  *
  * @since  1.0.0

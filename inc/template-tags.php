@@ -151,3 +151,16 @@ function theme_post_thumbnail( $classes = array(), $size = 'post-thumbnail' ) {
 	<?php endif; // End is_singular()
 }
 endif;
+
+if ( ! function_exists( 'theme_dberror_message' ) ) :
+
+/**
+ * Displays the DB Error Message.
+ *
+ * @since  1.0.0
+ */
+function theme_dberror_message() {
+	echo esc_html( get_theme_mod( 'db_error_message' ) );
+}
+
+endif;
