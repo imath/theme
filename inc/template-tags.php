@@ -160,7 +160,15 @@ if ( ! function_exists( 'theme_dberror_message' ) ) :
  * @since  1.0.0
  */
 function theme_dberror_message() {
-	echo esc_html( get_theme_mod( 'db_error_message' ) );
+	$t = theme();
+
+	if ( ! empty( $t->db_error_message ) ) {
+		$message = $t->db_error_message;
+	} else {
+		$message = get_theme_mod( 'db_error_message' );
+	}
+
+	echo esc_html( $message );
 }
 
 endif;

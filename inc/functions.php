@@ -255,6 +255,43 @@ function theme_get_template_part( $part = '' ) {
 	return get_template_part( sprintf( 'template-parts/%s', $template->post_mime_type ), $part );
 }
 
+function theme_set_db_error_template( $value = '', $old_value = '' ) {
+	$error_file =  WP_CONTENT_DIR . '/db-error.php';
+	$exists     =  file_exists( $error_file );
+
+	if ( $exists && ( ! $value || $value === $old_value ) ) {
+		return $value;
+	} else {
+		if ( $exists ) {
+			$is_writable = is_writeable( $error_file );
+		} else {
+			$is_writable = is_writable( dirname( $error_file ) ) && touch( $error_file );
+		}
+
+		if ( $is_writable ) {
+			$t = theme();
+
+			$t->db_error_message = $value;
+			add_filter( 'show_admin_bar', '__return_false' );
+
+			ob_start();
+			get_template_part( 'template-parts/dberror', 'header' );
+			get_template_part( 'template-parts/dberror', 'body' );
+			$template = ob_get_clean();
+
+			remove_filter( 'show_admin_bar', '__return_false' );
+			unset( $t->db_error_message );
+
+			$f = @fopen( $error_file, 'w' );
+			fwrite( $f, $template );
+			fclose( $f );
+		}
+	}
+
+	return $value;
+}
+add_filter( 'pre_set_theme_mod_db_error_message', 'theme_set_db_error_template', 10, 2 );
+
 /**
  * Upgrade the theme db version
  *

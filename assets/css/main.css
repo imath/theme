@@ -873,7 +873,8 @@ body.has-header-image.front-page.wp-custom-logo .custom-logo-link,
 body.has-header-image.front-page.wp-custom-logo:not(.title-tagline-hidden) .site-branding-text,
 body.has-header-image.home.blog.wp-custom-logo .custom-logo-link,
 body.has-header-image.home.blog.wp-custom-logo .custom-logo-link,
-body.has-header-image.db-error.wp-custom-logo .custom-logo-link {
+body.has-header-image.db-error.wp-custom-logo .custom-logo-link,
+body.has-header-image.db-error.wp-custom-logo:not(.title-tagline-hidden) .site-branding-text {
 	display: block;
 	text-align: center;
 }
@@ -1014,6 +1015,10 @@ body:not(.has-header-image) .custom-header-media {
 	.has-header-image.home.blog .custom-header,
 	.has-header-image.db-error .custom-header {
 		display: block;
+	}
+
+	.has-header-image.front-page .custom-header,
+	.has-header-image.home.blog .custom-header {
 		height: calc(100vh - 58px);
 	}
 
