@@ -198,3 +198,109 @@ function theme_icons( $domain = '' ) {
 
 	return $icons[ $domain ];
 }
+
+/**
+ * Make sure there's a version of the site icon for the login logo
+ *
+ * @since 1.0.0
+ *
+ * @param  array $icon_sizes The list of allowed icon sizes in Pixels.
+ * @return array             The list of allowed icon sizes in Pixels.
+ */
+function theme_site_icon_size( $icon_sizes = array() ) {
+	return array_merge( $icon_sizes, array( 84 ) );
+}
+add_filter( 'site_icon_image_sizes', 'theme_site_icon_size', 10, 1 );
+
+/**
+ * Registers a private Post Type to use for custom templates.
+ *
+ * @since 1.0.0
+ */
+function theme_register_template_post_type() {
+	register_post_type( 'theme_tpl', array(
+		'label'              => 'theme_template',
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => false,
+		'show_in_menu'       => false,
+		'show_in_nav_menus'  => false,
+		'query_var'          => false,
+		'rewrite'            => false,
+		'has_archive'        => false,
+		'hierarchical'       => true,
+	) );
+}
+add_action( 'init', 'theme_register_template_post_type' );
+
+/**
+ * Upgrade the theme db version
+ *
+ * @since  1.0.0
+ */
+function theme_upgrade_theme() {
+	if ( is_customize_preview() ) {
+		return;
+	}
+
+	$db_version = get_option( 'theme_version', 0 );
+	$version    = theme()->version;
+
+	if ( ! version_compare( $db_version, $version, '<' ) ) {
+		return;
+	}
+
+	$common_attributes = array(
+		'comment_status' => 'closed',
+		'ping_status'    => 'closed',
+		'post_status'    => 'private',
+		'post_content'   => '',
+		'post_type'      => 'theme_tpl',
+	);
+
+	$tpl_ids = array(
+		'email'    => array(
+			'ID'             => (int) get_option( 'theme_email_id', 0 ),
+			'post_mime_type' => 'email',
+			'post_title'     => __( 'Modèle d’e-mail', 'theme' ),
+			'post_content'   => sprintf( '<p>%1$s</p><p>%2$s</p><p>%3$s</p>',
+				__( 'Vous pouvez personnaliser le gabarit utilisé pour envoyer les e-mails de WordPress.', 'theme' ),
+				__( 'Pour cela utilisez la colonne latérale pour spécifier vos préférences.', 'theme' ),
+				__( 'Voici comment seront affichés les <a href="#">liens</a> contenus dans certains e-mails.', 'theme' )
+			),
+		),
+		'login'    => array(
+			'ID'             => (int) get_option( 'theme_login_id', 0 ),
+			'post_mime_type' => 'login',
+			'post_title'     => __( 'Formulaire de connexion', 'theme' ),
+			'post_content'   => sprintf( '<p>%1s</p>',
+				__( 'Cet article est utilisé pour personnaliser l’apparence du formulaire de connexion.', 'theme' )
+			),
+		),
+		'db_error' => array(
+			'ID'             => (int) get_option( 'theme_db_error_id', 0 ),
+			'post_mime_type' => 'dberror',
+			'post_title'     => __( 'Page d’erreur de connexion à la base de données', 'theme' ),
+			'post_content'   => sprintf( '<p>%1s</p>',
+				__( 'Cet article est utilisé pour personnaliser l’apparence de la page d’erreur de connexion à la base de données.', 'theme' )
+			),
+		),
+	);
+
+	// Install 1.0.0 if needed
+	if ( (float) $db_version < 1.0 ) {
+		// Init the Template ID.
+		$tpl_id = 0;
+
+		// Create the private posts.
+		foreach ( $tpl_ids as $k_tpl => $v_tpl ) {
+			$tpl_id = wp_insert_post( wp_parse_args( $v_tpl, $common_attributes ) );
+
+			update_option( "theme_{$k_tpl}_id", $tpl_id );
+		}
+	}
+
+	// Update version.
+	update_option( 'theme_version', $version );
+}
+add_action( 'admin_init', 'theme_upgrade_theme', 1000 );
