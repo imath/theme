@@ -812,6 +812,50 @@ a:hover, a:active {
 	max-width: 100%;
 }
 
+.widget-area .wrap {
+	display: grid;
+	grid-template-columns: auto 33% 33%;
+	grid-template-areas: "left center right";
+}
+
+.left-widgets {
+	grid-area: left;
+}
+
+.center-widgets {
+	grid-area: center;
+}
+
+.right-widgets {
+	grid-area: right;
+}
+
+.widget-column {
+	margin-right: 1em;
+}
+
+.widget-column ul,
+.widget-column ul > li {
+	margin: 0;
+	padding: 0;
+}
+
+@media screen and (min-width: 37.5em) {
+	#secondary .wrap {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 1000px;
+		padding-left: 1em;
+		padding-right: 1em;
+	}
+
+	#secondary {
+		padding: 1em 0;
+		border-top: solid 1px #23282d;
+	}
+}
+
+
 /*--------------------------------------------------------------
 # Content
 --------------------------------------------------------------*/

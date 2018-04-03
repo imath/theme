@@ -134,15 +134,30 @@ add_action( 'wp_enqueue_scripts', 'theme_scripts', 11 );
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
 function theme_widgets_init() {
-	register_sidebar( array(
-		'name'          => esc_html__( 'Pied de page', 'theme' ),
-		'id'            => 'footerbar',
-		'description'   => esc_html__( 'Ajouter les widgets ici.', 'theme' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
-	) );
+	$sidebars = array(
+		'sidebar-left' => array(
+			'name' => esc_html__( 'Pied de page (gauche)', 'theme' ),
+			'id'   => 'sidebar-left',
+		),
+		'sidebar-center' => array(
+			'name' => esc_html__( 'Pied de page (centre)', 'theme' ),
+			'id'   => 'sidebar-center',
+		),
+		'sidebar-right' => array(
+			'name' => esc_html__( 'Pied de page (droite)', 'theme' ),
+			'id'   => 'sidebar-right',
+		),
+	);
+
+	foreach ( $sidebars as $sidebar ) {
+		register_sidebar( array_merge( $sidebar, array(
+			'description'   => esc_html__( 'Ajouter les widgets ici.', 'theme' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		) ) );
+	}
 }
 add_action( 'widgets_init', 'theme_widgets_init' );
 

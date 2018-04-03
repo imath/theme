@@ -7,11 +7,25 @@
  * @package Thème
  */
 
-if ( ! is_active_sidebar( 'sidebar-1' ) ) {
+if ( ! is_active_sidebar( 'sidebar-left' ) || ! is_active_sidebar( 'sidebar-center' ) || ! is_active_sidebar( 'sidebar-right' ) ) {
 	return;
 }
 ?>
 
 <aside id="secondary" class="widget-area">
-	<?php dynamic_sidebar( 'sidebar-1' ); ?>
+	<div class="wrap">
+
+		<div class="widget-column left-widgets">
+			<?php dynamic_sidebar( 'sidebar-left' ); ?>
+		</div>
+
+		<div class="widget-column center-widgets">
+			<?php dynamic_sidebar( 'sidebar-center' ); ?>
+		</div>
+
+		<div class="widget-column right-widgets">
+			<?php dynamic_sidebar( 'sidebar-right' ); ?>
+		</div>
+
+	</div><!-- #wrap -->
 </aside><!-- #secondary -->
