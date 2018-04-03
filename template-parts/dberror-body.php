@@ -1,12 +1,9 @@
 <?php
 /**
- * Template part for displaying posts
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ * Template part for displaying the database connexion error message.
  *
  * @package Thème
  */
-
 ?>
 
 <article id="post-db-error">
