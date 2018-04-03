@@ -598,6 +598,15 @@ a:hover, a:active {
 	display: block;
 }
 
+.main-navigation.toggled ul ul {
+	display: block;
+	box-shadow: none;
+	position: static;
+	float: none;
+	left: auto;
+	z-index: auto;
+}
+
 @media screen and (min-width: 37.5em) {
 	.menu-toggle {
 		display: none;
