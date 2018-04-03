@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for the custom header image
+ * Template part for the main navigation
  *
  * @package Thème
  */

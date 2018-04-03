@@ -12,8 +12,13 @@
 ?>
 
 		<footer id="colophon" class="site-footer">
-			<div class="site-info">
-				<div class="wrap">
+			<div class="wrap">
+
+				<?php if ( has_nav_menu( 'navigation-social' ) ) :
+					get_template_part( 'template-parts/navigation', 'social' );
+				endif; ?>
+
+				<div class="site-info">
 					<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'theme' ) ); ?>"><?php
 						/* translators: %s: CMS name, i.e. WordPress. */
 						printf( esc_html__( 'Fièrement propulsé par %s', 'theme' ), 'WordPress' );
@@ -23,8 +28,8 @@
 						/* translators: 1: Theme name, 2: Theme author. */
 						printf( esc_html__( 'Thème: %1$s de %2$s.', 'theme' ), '<i>Thème</i>', '<a href="https://imathi.eu/">imath</a>' );
 					?>
-				</div><!-- .wrap -->
-			</div><!-- .site-info -->
+				</div><!-- .site-info -->
+			</div><!-- .wrap -->
 		</footer><!-- #colophon -->
 	</div><!-- .site-content -->
 </div><!-- #page -->

@@ -135,14 +135,31 @@ function theme_get_icon( $attrs = array(), $width = 20, $height = 20 ) {
 /**
  * Get the Twitter action link for the current page.
  *
- * @param string $url The matching href attribute's value.
+ * @param array $url The matching href attribute's value.
  * @return string The Twitter action link.
  */
-function theme_get_twitter_link( $url = '' ) {
+function theme_get_twitter_link( $url = array() ) {
+	$twitter_username = str_replace( 'https://twitter.com/', '', reset( $url ) );
+	$link             = '';
+	$title            = '';
+	$queried_object   = get_queried_object();
+
+	if ( is_a( $queried_object,'WP_Term' ) ) {
+		$link = get_term_link( $queried_object );
+		$title = get_term_field( 'name', $queried_object );
+	} elseif( is_a( $queried_object,'WP_Post' ) ) {
+		$link  = get_permalink( $queried_object );
+		$title = get_the_title( $queried_object );
+	} else {
+		$link  = $_SERVER['REQUEST_URI'];
+		$title_parts = explode( wptexturize( apply_filters( 'document_title_separator', '-' ) ), wp_get_document_title() );
+		$title = trim( reset( $title_parts ), ' ' );
+	}
+
 	return sprintf( 'https://twitter.com/intent/tweet?original_referer=%1$s&amp;source=tweetbutton&amp;text=%2$s&amp;url=%1$s&amp;via=%3$s',
-		urlencode( get_permalink() ),
-		urlencode( get_the_title() ),
-		esc_attr( get_bloginfo( 'name' ) )
+		urlencode( $link ),
+		urlencode( $title ),
+		esc_attr( $twitter_username )
 	);
 }
 
@@ -160,19 +177,17 @@ function theme_navigation_menu_icons( $item_output, $item, $depth, $args ) {
 	$icons = theme_icons();
 
 	// Change SVG icon inside menu if there is supported URL.
-	if ( 'navigation-top' === $args->theme_location ) {
-		foreach ( $icons as $key => $attrs ) {
-			if ( false !== strpos( $item_output, $key ) ) {
-				if ( 'twitter.com' === $key ) {
-					$item_output = preg_replace_callback( '/(?<=href=\").+(?=\")/', 'theme_get_twitter_link', $item_output );
-				}
-
-				$item_output = str_replace(
-					$item->title,
-					theme_get_icon( $attrs ) . '<span class="screen-reader-text">' . $item->title . '</span>',
-					$item_output
-				);
+	foreach ( $icons as $key => $attrs ) {
+		if ( false !== strpos( $item_output, $key ) ) {
+			if ( 'twitter.com' === $key && 'navigation-top' === $args->theme_location ) {
+				$item_output = preg_replace_callback( '/(?<=href=\").+(?=\")/', 'theme_get_twitter_link', $item_output );
 			}
+
+			$item_output = str_replace(
+				$item->title,
+				theme_get_icon( $attrs ) . '<span class="screen-reader-text">' . $item->title . '</span>',
+				$item_output
+			);
 		}
 	}
 

@@ -708,6 +708,32 @@ a:hover, a:active {
 	content: " →";
 }
 
+.social-navigation {
+	font-size: 16px;
+	font-size: 1rem;
+	margin-bottom: 1em;
+}
+
+.social-navigation ul {
+	list-style: none;
+	margin-bottom: 0;
+	margin-left: 0;
+}
+
+.social-navigation li {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.social-navigation li a {
+	text-decoration: none;
+	box-shadow: none;
+}
+
+.social-navigation svg {
+	vertical-align: middle;
+}
+
 /*--------------------------------------------------------------
 # Accessibility
 --------------------------------------------------------------*/
@@ -1139,10 +1165,18 @@ body:not(.has-header-image) .custom-header-media {
 .site-footer .wrap {
 	padding: 1em 5.75em;
 	max-width: 1000px;
+	display: grid;
+	grid-template-columns: 25% auto;
+	grid-template-areas: "social info";
 }
 
 .site-footer .site-info {
-	text-align: center;
+	grid-area: info;
+}
+
+.social-navigation {
+	grid-area: social;
+	overflow: hidden;
 }
 
 /*--------------------------------------------------------------
