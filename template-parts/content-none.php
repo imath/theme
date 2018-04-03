@@ -12,7 +12,7 @@
 <section class="no-results not-found">
 	<header class="page-header">
 		<div class="wrap">
-			<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'theme' ); ?></h1>
+			<h1 class="page-title"><?php esc_html_e( 'Aucun contenu n’est disponible pour le moment', 'theme' ); ?></h1>
 		</div><!-- .wrap -->
 	</header><!-- .page-header -->
 
@@ -25,7 +25,7 @@
 					printf(
 						wp_kses(
 							/* translators: 1: link to WP admin new post page. */
-							__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'theme' ),
+							__( 'Prêt à publier votre premier article ? <a href="%1$s">Commencez en cliquant ici</a>.', 'theme' ),
 							array(
 								'a' => array(
 									'href' => array(),
@@ -38,13 +38,13 @@
 
 			<?php elseif ( is_search() ) : ?>
 
-				<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'theme' ); ?></p>
+				<p><?php esc_html_e( 'Désolé, aucun contenu ne correspond à votre recherche. Merci de réessayer avec d’autres mots clés.', 'theme' ); ?></p>
 				<?php
 					get_search_form();
 
 			else : ?>
 
-				<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'theme' ); ?></p>
+				<p><?php esc_html_e( 'Le site n’a pas trouvé ce que vous recherchez. Merci d’utilisez le formulaire de recherche.', 'theme' ); ?></p>
 				<?php
 					get_search_form();
 

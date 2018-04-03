@@ -15,10 +15,12 @@ get_header(); ?>
 	if ( have_posts() ) : ?>
 
 		<header class="page-header">
-			<h1 class="page-title"><?php
-				/* translators: %s: search query. */
-				printf( esc_html__( 'Search Results for: %s', 'theme' ), '<span>' . get_search_query() . '</span>' );
-			?></h1>
+			<div class="wrap">
+				<h1 class="page-title"><?php
+					/* translators: %s: search query. */
+					printf( esc_html__( 'Résultat(s) de la recherche sur : %s', 'theme' ), '<span>' . get_search_query() . '</span>' );
+				?></h1>
+			</div><!-- .wrap -->
 		</header><!-- .page-header -->
 
 		<?php
