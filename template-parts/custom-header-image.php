@@ -14,4 +14,6 @@
 
 	<?php get_template_part( 'template-parts/custom-header', 'branding' ); ?>
 
+	<?php theme_display_maintenance_mode(); ?>
+
 </div><!-- .custom-header -->

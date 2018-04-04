@@ -206,8 +206,20 @@ function theme_icons( $domain = '' ) {
 			),
 		),
 		'github.com' => array(
-			'd' => 'M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z',
+			'd'    => 'M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z',
 			'fill' => '#23282d',
+		),
+		'maintenance.off' => array(
+			'd'    => 'M5 4l10 6-10 6v-12z',
+			'fill' => '#FFF',
+		),
+		'maintenance.on' => array(
+			'd'    => 'M5 16v-12h3v12h-3zM12 4h3v12h-3v-12z',
+			'fill' => '#FFF',
+		),
+		'maintenance.wp' => array(
+			'd'    => 'M20 10c0-5.52-4.48-10-10-10s-10 4.48-10 10 4.48 10 10 10 10-4.48 10-10zM10 1.010c4.97 0 8.99 4.020 8.99 8.99s-4.020 8.99-8.99 8.99-8.99-4.020-8.99-8.99 4.020-8.99 8.99-8.99zM8.010 14.82l-3.050-8.21c0.49-0.030 1.050-0.080 1.050-0.080 0.43-0.050 0.38-1.010-0.060-0.99 0 0-1.29 0.1-2.13 0.1-0.15 0-0.33 0-0.52-0.010 1.44-2.17 3.9-3.6 6.7-3.6 2.090 0 3.99 0.79 5.41 2.090-0.6-0.080-1.45 0.35-1.45 1.42 0 0.66 0.38 1.22 0.79 1.88 0.31 0.54 0.5 1.22 0.5 2.21 0 1.34-1.27 4.48-1.27 4.48l-2.71-7.5c0.48-0.030 0.75-0.16 0.75-0.16 0.43-0.050 0.38-1.1-0.050-1.080 0 0-1.3 0.11-2.14 0.11-0.78 0-2.11-0.11-2.11-0.11-0.43-0.020-0.48 1.060-0.050 1.080l0.84 0.080 1.12 3.040zM14.030 16.97l2.61-6.97s0.67-1.69 0.39-3.81c0.63 1.14 0.94 2.42 0.94 3.81 0 2.96-1.56 5.58-3.94 6.97zM2.68 6.77l3.82 10.48c-2.67-1.3-4.47-4.080-4.47-7.25 0-1.16 0.2-2.23 0.65-3.23zM10.13 11.3l2.29 6.25c-0.75 0.27-1.57 0.42-2.42 0.42-0.72 0-1.41-0.11-2.060-0.3',
+			'fill' => '#767676',
 		),
 	);
 
@@ -476,6 +488,149 @@ function theme_mailer_init( PHPMailer $phpmailer ) {
 	}
 }
 add_action( 'phpmailer_init', 'theme_mailer_init', 10, 1 );
+
+/**
+ * Returns a 'none' string.
+ *
+ * @since 1.0.0
+ *
+ * @return string 'none'.
+ */
+function theme__return_none() {
+	return 'none';
+}
+
+/**
+ * Checks if the theme is activated on the main site.
+ *
+ * @since 1.0.0
+ *
+ * @return boolean True if the theme is activated on the main site.
+ *                 False otherwise.
+ */
+function theme_is_main_site() {
+	return (int) get_current_network_id() === (int) get_current_blog_id();
+}
+
+/**
+ * Makes sure the Posts query only contains the Maintenance page.
+ *
+ * @since 1.0.0
+ *
+ * @param  null   $return   A null value to use the regular WP Query.
+ * @param  WP_Query $wq     The WP Query object.
+ * @return null|array       Null if not on front end.
+ *                          An array containing a Maintenance Post otherwise.
+ */
+function theme_maintenance_posts_pre_query( $return = null, WP_Query $wq ) {
+	if ( ! $wq->is_main_query() || true === $wq->get( 'suppress_filters' ) || is_admin() ) {
+		return $return;
+	}
+
+	// Set the queried object to avoid notices
+	$wq->queried_object = get_post( (object) array(
+		'ID'             => 0,
+		'comment_status' => 'closed',
+		'comment_count'  => 0,
+		'post_type'      => 'maintenance',
+		'post_title'     => __( 'Site en cours de maintenance', 'theme' ),
+	) );
+
+	$wq->queried_object_id = $wq->queried_object->ID;
+
+	// Set the Posts list to be limited to our custom post.
+	$posts = array( $wq->queried_object );
+
+	// Reset some WP Query properties
+	$wq->found_posts   = 1;
+	$wq->max_num_pages = 1;
+	$wq->posts         = $posts;
+	$wq->post          = $wq->queried_object;
+	$wq->post_count    = 1;
+
+	foreach ( array(
+		'is_home'       => true,
+		'is_page'       => true,
+		'is_single'     => false,
+		'is_archive'    => false,
+		'is_tax'        => false,
+	) as $key => $conditional_tag ) {
+		$wq->{$key} = (bool) $conditional_tag;
+	}
+
+	return $wq->posts;
+}
+
+/**
+ * Gets the maintenance template file path.
+ *
+ * @since  1.0.0
+ *
+ * @return string The maintenance template file path.
+ */
+function theme_get_maintenance_template() {
+	return get_theme_file_path( 'page-maintenance.php' );
+}
+
+/**
+ * Put the site in Maintenance mode if needed.
+ *
+ * @since 1.0.0
+ */
+function theme_maintenance_init() {
+	if ( is_admin() || current_user_can( 'maintenance_mode' ) ) {
+		return;
+	}
+
+	if ( ! get_theme_mod( 'maintenance_mode' ) ) {
+		return;
+	}
+
+	// Neutralize signups.
+	add_filter( 'option_users_can_register', '__return_zero' );
+
+	// Neutralize Multisite signups.
+	if ( is_multisite() && theme_is_main_site() ) {
+		add_filter( 'site_option_registration', 'theme__return_none' );
+	}
+
+	// Use the maintenance template
+	add_filter( 'template_include', 'theme_get_maintenance_template', 12 );
+
+	// Make sure nobody is filtering this anymore.
+	remove_all_filters( 'posts_pre_query' );
+
+	// Set the maintenance post.
+	add_filter( 'posts_pre_query', 'theme_maintenance_posts_pre_query', 10, 2 );
+}
+add_action( 'after_setup_theme', 'theme_maintenance_init', 20 );
+
+/**
+ * Maps The maintenance mode capability.
+ *
+ * Allow the admin to set the 'maintenance_mode' cap to some users or roles
+ * in case he wants to get feedbacks from them.
+ *
+ * @since 1.0.0
+ *
+ * @param  array   $caps    Capabilities for meta capability.
+ * @param  string  $cap     Capability name.
+ * @param  integer $user_id User id.
+ * @param  mixed   $args    Arguments.
+ * @return array            Actual capabilities for meta capability.
+ */
+function theme_map_meta_caps( $caps = array(), $cap = '', $user_id = 0, $args = array() ) {
+	if ( 'maintenance_mode' !== $cap ) {
+		return $caps;
+
+	// Fallback to Admin only if the current user does not have the maintenance mode cap.
+	} elseif ( empty( wp_get_current_user()->allcaps['maintenance_mode'] ) ) {
+		$caps = array( 'manage_options' );
+	}
+
+	return $caps;
+}
+add_filter( 'map_meta_cap', 'theme_map_meta_caps', 10, 4 );
 
 /**
  * Upgrade the theme db version

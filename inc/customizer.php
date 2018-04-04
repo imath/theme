@@ -15,6 +15,23 @@ function theme_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
+	// Maintenance page
+	$wp_customize->add_setting( 'maintenance_mode', array(
+		'default'           => 0,
+		'sanitize_callback' => 'absint',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( 'maintenance_mode', array(
+		'label'       => __( 'Maintenance', 'theme' ),
+		'section'     => 'theme_options',
+		'type'        => 'radio',
+		'choices'     => array(
+			0 => __( 'Pas de maintenance.', 'theme' ),
+			1 => __( 'Maintenance en cours.', 'theme' ),
+		),
+	) );
+
 	if ( isset( $wp_customize->selective_refresh ) ) {
 		$wp_customize->selective_refresh->add_partial( 'blogname', array(
 			'selector'        => '.site-title a',
@@ -23,6 +40,11 @@ function theme_customize_register( $wp_customize ) {
 		$wp_customize->selective_refresh->add_partial( 'blogdescription', array(
 			'selector'        => '.site-description',
 			'render_callback' => 'theme_customize_partial_blogdescription',
+		) );
+		$wp_customize->selective_refresh->add_partial( 'maintenance_mode', array(
+			'selector'         => '#maintenance-mode',
+			'render_callback'  => 'theme_display_maintenance_mode_info',
+			'fallback_refresh' => true,
 		) );
 	}
 
@@ -266,4 +288,36 @@ function theme_is_static_front_page() {
  */
 function theme_has_custom_logo() {
 	return (bool) has_custom_logo();
+}
+
+/**
+ * Adds a container to inform about the maintenance mode inside the customizer only.
+ *
+ * @since 1.0.0
+ */
+function theme_display_maintenance_mode() {
+	if ( ! is_customize_preview() ) {
+		return;
+	}
+
+	?>
+	<div id="maintenance-mode"><?php theme_display_maintenance_mode_info(); ?></div>
+	<?php
+}
+
+/**
+ * Partial render callback for the maintenance mode.
+ *
+ * @since 1.0.0
+ */
+function theme_display_maintenance_mode_info() {
+	if ( ! get_theme_mod( 'maintenance_mode' ) ) {
+		$class = 'off';
+		$icon  = theme_get_icon( theme_icons( 'maintenance.off' ) );
+	} else {
+		$class = 'on';
+		$icon  = theme_get_icon( theme_icons( 'maintenance.on' ) );;
+	}
+
+	printf( '<div class="%1$s">%2$s</div>', $class, $icon );
 }

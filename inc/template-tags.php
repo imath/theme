@@ -286,3 +286,17 @@ function theme_email_body_bg_color() {
 }
 
 endif;
+
+if ( ! function_exists( 'theme_the_maintenance_title' ) ) :
+/**
+ * Outputs the Maintenance page title.
+ *
+ * @since 1.0.0
+ */
+function theme_the_maintenance_title() {
+	$page = get_queried_object();
+
+	echo apply_filters( 'the_title', $page->post_title, $page->ID );
+}
+
+endif;
