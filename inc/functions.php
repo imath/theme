@@ -396,6 +396,88 @@ function theme_email_print_css() {
 }
 
 /**
+ * Uses a template to render emails
+ *
+ * @since  1.0.0
+ *
+ * @param  string       $text The text of the email.
+ * @return string|false       The html text for the email, or false.
+ */
+function theme_email_set_html_content( $text ) {
+	if ( empty( $text ) ) {
+		return false;
+	}
+
+	ob_start();
+	get_template_part( 'email' );
+	$email_template = ob_get_clean();
+
+	if ( empty( $email_template ) ) {
+		return false;
+	}
+
+	// Make sure the link to set or reset the password
+	// will be clickable in text/html
+	if ( did_action( 'retrieve_password_key' ) ) {
+		preg_match( '/<(.+?)>/', $text, $match );
+
+		if ( ! empty( $match[1] ) ) {
+
+			$login_url = wp_login_url();
+			$link      = "\n" . '<a href="' . $match[1] . '">' . $login_url . '</a>';
+
+			if ( preg_match( '/[^<]' . addcslashes( $login_url, '/' ) . '/', $text ) ) {
+				$text = preg_replace( '/[^<]' . addcslashes( $login_url, '/' ) . '/', $link, $text );
+			} else {
+				$text .= $link;
+			}
+
+			$text = str_replace( $match[0], '', $text );
+		}
+	}
+
+	// Make sure the Post won't be embed.
+	add_filter( 'pre_oembed_result', '__return_false' );
+
+	$pagetitle = esc_attr( get_bloginfo( 'name', 'display' ) );
+	$content   = apply_filters( 'the_content', $text );
+
+	remove_filter( 'pre_oembed_result', '__return_false' );
+
+	// Make links clickable
+	$content = make_clickable( $content );
+
+	$email = str_replace( '{{pagetitle}}', $pagetitle, $email_template );
+	$email = str_replace( '{{content}}',   $content,   $email          );
+
+	return $email;
+}
+
+/**
+ * Uses a multipart/alternate email.
+ *
+ * NB: follow the progress made on
+ * https://core.trac.wordpress.org/ticket/15448
+ *
+ * @since 1.0.0
+ *
+ * @param PHPMailer $phpmailer The Mailer class.
+ */
+function theme_mailer_init( PHPMailer $phpmailer ) {
+	if ( empty( $phpmailer->Body ) ) {
+		return;
+	}
+
+	$html_content = theme_email_set_html_content( $phpmailer->Body );
+
+	if ( $html_content ) {
+		$phpmailer->AltBody = $phpmailer->Body;
+		$phpmailer->Body    = $html_content;
+	}
+}
+add_action( 'phpmailer_init', 'theme_mailer_init', 10, 1 );
+
+/**
  * Upgrade the theme db version
  *
  * @since  1.0.0
