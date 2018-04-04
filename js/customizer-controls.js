@@ -40,6 +40,14 @@
 		} );
 	} );
 
+	api.section( 'theme_email', function( section ) {
+		previewUrlValue = api.previewer.previewUrl;
+
+		section.expanded.bind( function( isExpanded ) {
+			setPreviewUrl( themeVars.emailUrl, isExpanded );
+		} );
+	} );
+
 	api.bind( 'ready', function() {
 		// Detect when the front page sections section is expanded (or closed) so we can adjust the preview accordingly.
 		api.section( 'theme_options', function( section ) {

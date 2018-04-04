@@ -312,6 +312,90 @@ function theme_set_db_error_template( $value = '', $old_value = '' ) {
 add_filter( 'pre_set_theme_mod_db_error_message', 'theme_set_db_error_template', 10, 2 );
 
 /**
+ * Checks if the email logo should be used.
+ *
+ * @since  1.0.0
+ *
+ * @return boolean True if the email logo should be used. False otherwise.
+ */
+function theme_use_email_logo() {
+	return (bool) has_custom_logo() && ! get_theme_mod( 'disable_email_logo' );
+}
+
+/**
+ * Makes sure the Logo is 60px wide or tall into the email's header.
+ *
+ * @since 1.0.0
+ *
+ * @param  array  $image An array containing the src, width and height in pixels of the image.
+ * @return array         An array containing the src, width and height in pixels of the image.
+ */
+function theme_email_logo_size( $image = array() ) {
+	if ( isset( $image[1] ) && isset( $image[2] ) ) {
+		$width  = $image[1];
+		$height = $image[2];
+
+		if ( $width > $height ) {
+			$image[2] = floor( ( $height/ $width ) * 60 );
+			$image[1] = 60;
+		} else {
+			$image[1] = floor( ( $width / $height ) * 60 );
+			$image[2] = 60;
+		}
+	}
+
+	return $image;
+}
+
+/**
+ * Prints the content of the CSS file used to style the emails.
+ *
+ * @since 1.0.0
+ */
+function theme_email_print_css() {
+	/**
+	 * Filter here to replace the base email CSS rules.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string Absolute file to the css file.
+	 */
+	$css = apply_filters( 'theme_email_get_css', sprintf( '%1$semail%2$s.css',
+		get_theme_file_path( 'assets/css/' ),
+		theme_js_css_suffix()
+	) );
+
+	// Directly insert it into the email template.
+	if ( $css && file_exists( $css ) ) {
+		include( $css );
+	}
+
+	$link_color = get_theme_mod( 'email_link_text_color' );
+
+	// Add css overrides for the links
+	if ( '#23282d' !== $link_color ) {
+		printf( '
+			a,
+			a:hover,
+			a:visited,
+			a:active {
+				color: %s;
+			}
+		', esc_attr( $link_color ) );
+	}
+
+	// Add css overrides for the text color of the header
+	if ( is_customize_preview() ) {
+		echo '
+			tr { border-bottom: none; }
+			table { margin: 0; }
+			a { text-decoration: underline !important; }
+			.container-padding.header a.custom-logo-link { padding: 0; }
+		';
+	}
+}
+
+/**
  * Upgrade the theme db version
  *
  * @since  1.0.0

@@ -89,6 +89,122 @@ function theme_customize_register( $wp_customize ) {
 			'type'        => 'textarea'
 		) );
 	}
+
+	// Makes sure the Email Template is available for preview
+	if ( get_option( 'theme_email_id' ) ) {
+		// Theme email section.
+		$wp_customize->add_section( 'theme_email', array(
+			'title'    => __( 'Modèle d’email', 'theme' ),
+			'priority' => 140, // After Theme options.
+		) );
+
+		// Allow the admin to disable the email logo
+		$wp_customize->add_setting( 'disable_email_logo', array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+		) );
+
+		$wp_customize->add_control( 'disable_email_logo', array(
+			'label'   => __( 'Intégrer le logo du site dans l’e-mail', 'theme' ),
+			'section' => 'theme_email',
+			'type'    => 'radio',
+			'choices' => array(
+				0 => __( 'Oui', 'theme' ),
+				1 => __( 'Non', 'theme' ),
+			),
+			'active_callback' => 'theme_has_custom_logo',
+		) );
+
+		// Allow the admin to disable the email sitename
+		$wp_customize->add_setting( 'disable_email_sitename', array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+		) );
+
+		$wp_customize->add_control( 'disable_email_sitename', array(
+			'label'   => __( 'Intégrer le nom du site dans l’e-mail', 'theme' ),
+			'section' => 'theme_email',
+			'type'    => 'radio',
+			'choices' => array(
+				0 => __( 'Oui', 'theme' ),
+				1 => __( 'Non', 'theme' ),
+			),
+		) );
+
+		// Allow the admin to customize the header's text color.
+		$wp_customize->add_setting( 'email_header_text_color', array(
+			'default'           => '#23282d',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'email_header_text_color', array(
+			'label'   => __( 'Couleur du texte de l’en-tête', 'theme' ),
+			'section' => 'theme_email',
+		) ) );
+
+		// Allow the admin to customize the header's background color.
+		$wp_customize->add_setting( 'header_background_color', array(
+			'default'           => '#FFF',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'header_background_color', array(
+			'label'   => __( 'Couleur d’arrière plan de l’en-tête', 'theme' ),
+			'section' => 'theme_email',
+		) ) );
+
+		// Allow the admin to customize the header's underline color.
+		$wp_customize->add_setting( 'header_line_color', array(
+			'default'           => '#23282d',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'header_line_color', array(
+			'label'   => __( 'Couleur de soulignement de l’en-tête', 'theme' ),
+			'section' => 'theme_email',
+		) ) );
+
+		// Allow the admin to customize the body's text color.
+		$wp_customize->add_setting( 'email_body_text_color', array(
+			'default'           => '#23282d',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'email_body_text_color', array(
+			'label'   => __( 'Couleur du texte du corps du message', 'theme' ),
+			'section' => 'theme_email',
+		) ) );
+
+		// Allow the admin to customize the body's background color.
+		$wp_customize->add_setting( 'body_background_color', array(
+			'default'           => '#FFF',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'body_background_color', array(
+			'label'   => __( 'Couleur d’arrière plan du corps du message', 'theme' ),
+			'section' => 'theme_email',
+		) ) );
+
+		// Allow the admin to customize the link's text color.
+		$wp_customize->add_setting( 'email_link_text_color', array(
+			'default'           => '#23282d',
+			'sanitize_callback' => 'sanitize_hex_color',
+			'transport'         => 'refresh',
+		) );
+
+		$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'email_link_text_color', array(
+			'label'   => __( 'Couleur des liens', 'theme' ),
+			'section' => 'theme_email',
+		) ) );
+	}
 }
 add_action( 'customize_register', 'theme_customize_register' );
 
@@ -131,11 +247,23 @@ function theme_customize_control_js() {
 	);
 
 	wp_localize_script( 'theme-customizer-controls', 'themeVars', array(
-		'dbErrorlUrl'  => esc_url_raw( get_permalink( $tpl_ids['db_error'] ) ),
+		'dbErrorlUrl' => esc_url_raw( get_permalink( $tpl_ids['db_error'] ) ),
+		'emailUrl'    => esc_url_raw( get_permalink( $tpl_ids['email'] ) ),
 	) );
 }
 add_action( 'customize_controls_enqueue_scripts', 'theme_customize_control_js' );
 
 function theme_is_static_front_page() {
 	return ( is_front_page() && ! is_home() );
+}
+
+/**
+ * Is there a custom logo for the site ?
+ *
+ * @since 1.0.0.
+ *
+ * @return bool True if a custom logo is activated. False otherwise.
+ */
+function theme_has_custom_logo() {
+	return (bool) has_custom_logo();
 }

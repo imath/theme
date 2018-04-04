@@ -153,7 +153,6 @@ function theme_post_thumbnail( $classes = array(), $size = 'post-thumbnail' ) {
 endif;
 
 if ( ! function_exists( 'theme_dberror_message' ) ) :
-
 /**
  * Displays the DB Error Message.
  *
@@ -169,6 +168,121 @@ function theme_dberror_message() {
 	}
 
 	echo esc_html( $message );
+}
+
+endif;
+
+if ( ! function_exists( 'theme_email_logo' ) ) :
+/**
+ * Displays the site logo into the email.
+ *
+ * @since  1.0.0
+ */
+function theme_email_logo() {
+	if ( ! has_custom_logo() ) {
+		return;
+	}
+
+	// Filter just before the custom logo tag to control its size in pixels.
+	add_filter( 'wp_get_attachment_image_src', 'theme_email_logo_size', 10, 1 );
+	?>
+	<div id="site-logo">
+		<?php the_custom_logo(); ?>
+	</div>
+	<?php
+
+	// Stop filtering once it's no more needed.
+	remove_filter( 'wp_get_attachment_image_src', 'theme_email_logo_size', 10, 1 );
+}
+
+endif;
+
+if ( ! function_exists( 'theme_email_sitename' ) ) :
+/**
+ * Displays the site name into the email.
+ *
+ * @since  1.0.0
+ */
+function theme_email_sitename() {
+	$name = get_bloginfo( 'name' );
+
+	if ( ! $name ) {
+		return;
+	}
+
+	echo esc_html( $name );
+}
+
+endif;
+
+if ( ! function_exists( 'theme_email_title_text_color' ) ) :
+/**
+ * Outputs the Email's title color.
+ *
+ * @since 1.0.0
+ */
+function theme_email_title_text_color() {
+	echo get_theme_mod( 'email_header_text_color' );
+}
+
+endif;
+
+if ( ! function_exists( 'theme_email_title_bg_color' ) ) :
+/**
+ * Outputs the Email's title background color.
+ *
+ * @since 1.0.0
+ */
+function theme_email_title_bg_color() {
+	echo get_theme_mod( 'header_background_color' );
+}
+
+endif;
+
+if ( ! function_exists( 'theme_email_separator_color' ) ) :
+/**
+ * Outputs the Email's header underline color.
+ *
+ * @since 1.0.0
+ */
+function theme_email_separator_color() {
+	echo get_theme_mod( 'header_line_color' );
+}
+
+endif;
+
+if ( ! function_exists( 'theme_email_body_text_color' ) ) :
+/**
+ * Outputs the Email's body text color.
+ *
+ * @since 1.0.0
+ */
+function theme_email_body_text_color() {
+	echo get_theme_mod( 'email_body_text_color' );
+}
+
+endif;
+
+if ( ! function_exists( 'theme_email_body_link_color' ) ) :
+/**
+ * Outputs the Email's link color.
+ *
+ * @since 1.0.0
+ */
+function theme_email_body_link_color() {
+	echo get_theme_mod( 'email_link_text_color' );
+}
+
+endif;
+
+if ( ! function_exists( 'theme_email_body_bg_color' ) ) :
+/**
+ * Outputs the Email's body background color.
+ *
+ * @since 1.0.0
+ */
+function theme_email_body_bg_color() {
+	echo get_theme_mod( 'body_background_color' );
 }
 
 endif;
