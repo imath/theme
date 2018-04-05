@@ -8,6 +8,8 @@
 /**
  * Add postMessage support for site title and description for the Theme Customizer.
  *
+ * @since 1.0.0
+ *
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
 function theme_customize_register( $wp_customize ) {
@@ -227,6 +229,50 @@ function theme_customize_register( $wp_customize ) {
 			'section' => 'theme_email',
 		) ) );
 	}
+
+	// Makes sure the Login Template is available for preview
+	if ( get_option( 'theme_login_id' ) ) {
+		// Theme login section.
+		$wp_customize->add_section( 'theme_login', array(
+			'title'    => __( 'Formulaire de connexion', 'theme' ),
+			'priority' => 145, // After Theme options.
+		) );
+
+		// Allow the admin to enable the login logo
+		$wp_customize->add_setting( 'enable_login_logo', array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+		) );
+
+		$wp_customize->add_control( 'enable_login_logo', array(
+			'label'           => __( 'Remplacer le logo de WordPress par l’icône du site', 'theme' ),
+			'section'         => 'theme_login',
+			'type'            => 'radio',
+			'choices'         => array(
+				0 => __( 'Non', 'theme' ),
+				1 => __( 'Oui', 'theme' ),
+			),
+			'active_callback' => 'theme_has_site_icon',
+		) );
+
+		// Allow the admin to enable the login custom header
+		$wp_customize->add_setting( 'enable_login_custom_header', array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+			'transport'         => 'refresh',
+		) );
+
+		$wp_customize->add_control( 'enable_login_custom_header', array(
+			'label'           => __( 'Intégrer l’arrière plan du site.', 'theme' ),
+			'section'         => 'theme_login',
+			'type'            => 'radio',
+			'choices'         => array(
+				0 => __( 'Non', 'theme' ),
+				1 => __( 'Oui', 'theme' ),
+			)
+		) );
+	}
 }
 add_action( 'customize_register', 'theme_customize_register' );
 
@@ -271,6 +317,7 @@ function theme_customize_control_js() {
 	wp_localize_script( 'theme-customizer-controls', 'themeVars', array(
 		'dbErrorlUrl' => esc_url_raw( get_permalink( $tpl_ids['db_error'] ) ),
 		'emailUrl'    => esc_url_raw( get_permalink( $tpl_ids['email'] ) ),
+		'loginlUrl'   => esc_url_raw( get_permalink( $tpl_ids['login'] ) ),
 	) );
 }
 add_action( 'customize_controls_enqueue_scripts', 'theme_customize_control_js' );
@@ -288,6 +335,17 @@ function theme_is_static_front_page() {
  */
 function theme_has_custom_logo() {
 	return (bool) has_custom_logo();
+}
+
+/**
+ * Is there site icon for the site ?
+ *
+ * @since 1.0.0.
+ *
+ * @return bool True if a site icon is activated. False otherwise.
+ */
+function theme_has_site_icon() {
+	return (bool) get_site_icon_url( 84 );
 }
 
 /**

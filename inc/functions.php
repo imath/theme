@@ -231,19 +231,6 @@ function theme_icons( $domain = '' ) {
 }
 
 /**
- * Make sure there's a version of the site icon for the login logo
- *
- * @since 1.0.0
- *
- * @param  array $icon_sizes The list of allowed icon sizes in Pixels.
- * @return array             The list of allowed icon sizes in Pixels.
- */
-function theme_site_icon_size( $icon_sizes = array() ) {
-	return array_merge( $icon_sizes, array( 84 ) );
-}
-add_filter( 'site_icon_image_sizes', 'theme_site_icon_size', 10, 1 );
-
-/**
  * Registers a private Post Type to use for custom templates.
  *
  * @since 1.0.0
@@ -631,6 +618,179 @@ function theme_map_meta_caps( $caps = array(), $cap = '', $user_id = 0, $args = 
 	return $caps;
 }
 add_filter( 'map_meta_cap', 'theme_map_meta_caps', 10, 4 );
+
+/**
+ * Make sure there's a version of the site icon for the login logo
+ *
+ * @since 1.0.0
+ *
+ * @param  array $icon_sizes The list of allowed icon sizes in Pixels.
+ * @return array             The list of allowed icon sizes in Pixels.
+ */
+function theme_site_icon_size( $icon_sizes = array() ) {
+	return array_merge( $icon_sizes, array( 84 ) );
+}
+add_filter( 'site_icon_image_sizes', 'theme_site_icon_size', 10, 1 );
+
+/**
+ * Gets the active type of signups.
+ *
+ * @since  1.0.0
+ *
+ * @return string The active type of signups.
+ */
+function theme_active_signup() {
+	/**
+	 * Filters the type of site sign-up.
+	 *
+	 * @since WordPress 3.0.0
+	 *
+	 * @param string $active_signup String that returns registration type. The value can be
+	 *                              'all', 'none', 'blog', or 'user'.
+	 */
+	return apply_filters( 'wpmu_active_signup', get_site_option( 'registration', 'none' ) );
+}
+
+/**
+ * Use the Site's url for the login logo.
+ *
+ * @since  1.0.0
+ *
+ * @param  string $url URL of the login logo link.
+ * @return string      URL of the login logo link.
+ */
+function theme_login_logo_url( $url = '' ) {
+	if ( ! theme_is_main_site() ) {
+		return $url;
+	}
+
+	return home_url( '/' );
+}
+add_filter( 'login_headerurl', 'theme_login_logo_url' );
+
+/**
+ * Gets the login's preview screen action.
+ *
+ * @since  1.0.0
+ *
+ * @return string The form action type.
+ */
+function theme_login_get_action() {
+	$action = 'login';
+
+	if ( isset( $_REQUEST['action'] ) ) {
+		$action = $_REQUEST['action'];
+	} else {
+		$url_parts = explode( '/', wp_parse_url( $_SERVER['REQUEST_URI'] )['path'] );
+
+		if ( 'wp-signup.php' === end( $url_parts ) ) {
+			$action = 'register';
+		} elseif ( 'wp-activate.php' === end( $url_parts ) ) {
+			$action = 'activate';
+		}
+	}
+
+	return apply_filters( 'theme_login_get_action', $action );
+}
+
+/**
+ * Checks if the login logo should be used.
+ *
+ * @since  1.0.0
+ *
+ * @return boolean True if the login logo should be used. False otherwise.
+ */
+function theme_use_login_logo() {
+	return has_site_icon() && (bool) get_theme_mod( 'enable_login_logo' );
+}
+
+/**
+ * Customize the login screen look and feel.
+ *
+ * @since 1.0.0
+ *
+ * @return string CSS Outut.
+ */
+function theme_login_style() {
+	$logo_rules = '';
+
+	if ( theme_use_login_logo() ) {
+		$logo_rules = sprintf( '
+			#login h1 a {
+				background-image: none, url(%s);
+			}
+		', esc_url_raw( get_site_icon_url( 84 ) ) );
+	}
+
+	$color_rules = file_get_contents( sprintf( '%1$slogin%2$s.css',
+		get_theme_file_path( 'assets/css/' ),
+		theme_js_css_suffix()
+	) );
+
+	$custom_header_rules = '';
+
+	if ( get_theme_mod( 'enable_login_custom_header' ) ) {
+		$custom_header = get_custom_header();
+
+		$custom_header_rules = sprintf( '
+			body.login {
+				background-image: url( %s );
+				background-size: cover;
+				background-repeat: no-repeat;
+			}
+
+			body.login p#nav, body.login p#backtoblog {
+				background: #FFF;
+				-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+				padding: 8px 24px;
+				margin-top: 0;
+			}
+
+			body.login p#nav a, body.login p#backtoblog a {
+				color: #23282d;
+			}
+		', $custom_header->url );
+	}
+
+	$ms_rules = '';
+
+	if ( ( did_action( 'before_signup_header' ) || did_action( 'activate_header' ) ) && theme_is_main_site() ) {
+		$ms_rules = file_get_contents( sprintf( '%1$sms-register%2$s.css',
+			get_theme_file_path( 'assets/css/' ),
+			theme_js_css_suffix()
+		) );
+	}
+
+	wp_add_inline_style( 'login', sprintf( '
+		%1$s
+
+		%2$s
+
+		%3$s
+
+		%4$s
+	', $logo_rules, $color_rules, $custom_header_rules, $ms_rules ) );
+}
+add_action( 'login_enqueue_scripts', 'theme_login_style', 9 );
+
+/**
+ * Enqueues a specific script to improve the Blog registration form.
+ *
+ * @since 1.0.0
+ */
+function theme_signup_form_enqueue_js() {
+	if ( ! theme_is_main_site() ) {
+		return;
+	}
+
+	$min = theme_js_css_suffix();
+	$t   = theme();
+
+	wp_enqueue_script( 'theme-signup-form', get_stylesheet_directory_uri() . "/js/signup-form{$min}.js", array(), $t->version, true );
+}
+add_action( 'signup_blogform',     'theme_signup_form_enqueue_js' );
+add_action( 'signup_extra_fields', 'theme_signup_form_enqueue_js' );
 
 /**
  * Upgrade the theme db version

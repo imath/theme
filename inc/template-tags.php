@@ -300,3 +300,152 @@ function theme_the_maintenance_title() {
 }
 
 endif;
+
+if ( ! function_exists( 'theme_login_document_title' ) ) :
+/**
+ * Outputs the login's preview screen document title.
+ *
+ * @since 1.0.0
+ */
+function theme_login_document_title() {
+	$separator = '&lsaquo;';
+
+	if ( is_rtl() ) {
+		$separator = '&rsaquo;';
+	}
+
+	$title  = __( 'Connexion', 'theme' );
+	$action = theme_login_get_action();
+
+	if ( 'lostpassword' === $action ) {
+		$title  = __( 'Mot de passe oublié', 'theme' );
+	} elseif ( 'register' === $action ) {
+		$title  = __( 'Inscription', 'theme' );
+	} elseif ( 'activate' === $action ) {
+		$title  = __( 'Activation', 'theme' );
+	}
+
+	return printf( '%1$s %2$s %3$s',
+		get_bloginfo( 'name', 'display' ),
+		$separator,
+		esc_html( $title )
+	);
+}
+
+endif;
+
+if ( ! function_exists( 'theme_login_submit_title' ) ) :
+/**
+ * Outputs the login's preview screen submit button value.
+ *
+ * @since 1.0.0
+ */
+function theme_login_submit_title() {
+	esc_attr_e( 'Se connecter', 'theme' );
+}
+
+endif;
+
+if ( ! function_exists( 'theme_login_url' ) ) :
+/**
+ * Outputs the login's preview screen header url.
+ *
+ * @since  1.0.0
+ */
+function theme_login_url() {
+	printf( '%s', esc_url(
+		/**
+		 * Filters link URL of the header logo above login form.
+		 *
+		 * @since WordPress 2.1.0
+		 *
+		 * @param string $login_header_url Login header logo URL.
+		 */
+		apply_filters( 'login_headerurl', __( 'https://fr.wordpress.org/', 'theme' ) )
+	) );
+}
+
+endif;
+
+if ( ! function_exists( 'theme_login_title' ) ) :
+/**
+ * Outputs the login's preview screen header title.
+ *
+ * @since  1.0.0
+ */
+function theme_login_title() {
+	printf( '%s', esc_attr(
+		/**
+		 * Filters the title attribute of the header logo above login form.
+		 *
+		 * @since WordPress 2.1.0
+		 *
+		 * @param string $login_header_title Login header logo title attribute.
+		 */
+		apply_filters( 'login_headertitle', __( 'Propulsé par WordPress', 'theme' ) )
+	) );
+}
+
+endif;
+
+if ( ! function_exists( 'theme_login_navigation' ) ) :
+/**
+ * Outputs the Login navigation.
+ *
+ * @since  1.0.0
+ */
+function theme_login_navigation() {
+	$navlinks = array();
+
+	$action       = theme_login_get_action();
+	$registration = get_option( 'users_can_register' );
+	$register     = '';
+
+	if ( is_customize_preview() ) {
+		$url = get_permalink( get_option( 'theme_login_id' ) );
+	} else {
+		$url = wp_login_url();
+	}
+
+	// urls
+	$login = sprintf( '<a href="%1$s">%2$s</a>',
+		esc_url( $url ),
+		esc_html__( 'Connexion', 'theme' )
+	);
+
+	$lostpass = sprintf( '<a href="%1$s">%2$s</a>',
+		esc_url( add_query_arg( 'action', 'lostpassword', $url ) ),
+		esc_html__( 'Mot de passe oublié ?', 'theme' )
+	);
+
+	if ( $registration ) {
+		$register = sprintf( '<a href="%1$s">%2$s</a>',
+			esc_url( add_query_arg( 'action', 'register', $url ) ),
+			esc_html__( 'Inscription', 'theme' )
+		);
+	}
+
+	if ( 'login' === $action ) {
+		array_push( $navlinks, $lostpass );
+
+		if ( $register ) {
+			array_unshift( $navlinks, $register );
+		}
+	} elseif ( 'lostpassword' === $action ) {
+		array_push( $navlinks, $login );
+
+		if ( $register ) {
+			array_push( $navlinks, $register );
+		}
+	} elseif ( 'register' === $action ) {
+		$navlinks = array( $login, $lostpass );
+	}
+
+	if ( ! $navlinks ) {
+		return;
+	}
+
+	echo join( ' | ', $navlinks );
+}
+
+endif;

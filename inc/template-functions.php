@@ -194,3 +194,53 @@ function theme_navigation_menu_icons( $item_output, $item, $depth, $args ) {
 	return $item_output;
 }
 add_filter( 'walker_nav_menu_start_el', 'theme_navigation_menu_icons', 10, 4 );
+
+/**
+ * Outputs the login's preview screen body classes.
+ *
+ * @since  1.0.0
+ */
+function theme_login_classes() {
+	$action  = theme_login_get_action();
+	$classes = array(
+		'login-action-' . $action,
+		'wp-core-ui',
+		'rtl',
+		'locale-' . sanitize_html_class( strtolower( str_replace( '_', '-', get_locale() ) ) ),
+	);
+
+	if ( ! is_rtl() ) {
+		unset( $classes[2] );
+	}
+
+	if ( isset( $_POST['stage'] ) ) {
+		array_push( $classes, sanitize_html_class( $_POST['stage'] ) );
+	}
+
+	/**
+	 * Filters the login page body classes.
+	 *
+	 * @since WordPress 3.5.0
+	 *
+	 * @param array  $classes An array of body classes.
+	 * @param string $action  The action that brought the visitor to the login page.
+	 */
+	$classes = apply_filters( 'login_body_class', $classes, $action );
+
+	echo 'login ' . join( ' ', $classes );
+}
+
+/**
+ * Apply the signup/activate header hooks when requested.
+ *
+ * @since 1.0.0
+ *
+ * @param  string $hook The name of the hook to call.
+ */
+function theme_ms_register_header( $hook = 'do_signup_header' ) {
+	add_action( 'login_head', $hook );
+	add_action( 'login_head', 'wp_no_robots' );
+	?>
+	<meta name="viewport" content="width=device-width" />
+	<?php
+}

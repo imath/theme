@@ -1,0 +1,38 @@
+#login p.submit .button-primary.button-large,
+#login p.submit .button-primary[disabled],
+#login p.submit .button-primary:disabled {
+	color: #FFF !important;
+	background-color: #23282d !important;
+	border-color: #FFF !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+}
+
+#login p.submit .button-primary.button-large:hover,
+#login p.submit .button-primary:disabled:hover {
+	color: #23282d !important;
+	background-color: #FFF !important;
+	border-color: #23282d !important;
+}
+
+a:focus {
+	color: #23282d !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+#login input[type="text"]:focus,
+#login input[type="password"]:focus {
+	border-color: #23282d !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+#login form {
+	background-color: #fff;
+}
+
+#login label {
+	color: #23282d;
+}
