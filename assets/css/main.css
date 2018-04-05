@@ -669,6 +669,16 @@ a:hover, a:active {
 	.site-navigation-fixed .main-navigation .nav-menu li.last {
 		display: block;
 	}
+
+	.site-navigation-fixed .main-navigation .nav-menu li.has-icon a {
+		padding-bottom: 0.9em !important;
+	}
+
+	body.front-page .navigation-top:not(.site-navigation-fixed) .main-navigation li.menu-item-home a:after {
+		content: " ⇩";
+		font-weight: bold;
+		color: #767676;
+	}
 }
 
 .site-main .comment-navigation,
