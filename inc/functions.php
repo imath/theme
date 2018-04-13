@@ -793,6 +793,20 @@ add_action( 'signup_blogform',     'theme_signup_form_enqueue_js' );
 add_action( 'signup_extra_fields', 'theme_signup_form_enqueue_js' );
 
 /**
+ * Force embed tweets to be centered.
+ *
+ * @since  1.0.0
+ */
+function theme_oembed_fetch_url( $provider = '' ) {
+	if ( false !== strpos( $provider, 'https://publish.twitter.com/oembed' ) ) {
+		$provider = add_query_arg( 'align', 'center', $provider );
+	}
+
+	return $provider;
+}
+add_filter( 'oembed_fetch_url', 'theme_oembed_fetch_url', 10, 1 );
+
+/**
  * Upgrade the theme db version
  *
  * @since  1.0.0
