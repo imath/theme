@@ -266,3 +266,65 @@ function theme_ms_register_header( $hook = 'do_signup_header' ) {
 	<meta name="viewport" content="width=device-width" />
 	<?php
 }
+
+/**
+ * Add Sharing cards to single posts/pages
+ *
+ * @since 1.0.0
+ *
+ * @return string Facbook OG & Twitter meta tags.
+ */
+function theme_sharing_cards() {
+	if ( ! is_singular() || is_customize_preview() ) {
+		return;
+	}
+
+	$post = get_post();
+
+	if ( ! empty( $post->post_excerpt ) ) {
+		$description = strip_shortcodes( $post->post_excerpt );
+	} elseif ( ! empty( $post->post_content ) ) {
+		$description = strip_shortcodes( $post->post_content );
+	} else {
+		$description = get_bloginfo( 'description' );
+	}
+
+	$title       = wp_strip_all_tags( apply_filters( 'the_title', $post->post_title, $post->ID ) );
+	$description = wp_strip_all_tags( apply_filters( 'the_excerpt', wp_trim_words( $description, 40, '...' ) ) );
+
+	$metas = array(
+		'twitter:card'        => 'summary_large_image',
+		'twitter:site'        => '@imath',
+		'twitter:title'       => $title,
+		'twitter:description' => $description,
+		'og:url'              => esc_url_raw( get_permalink( $post ) ),
+		'og:type'             => esc_attr( get_post_type( $post ) ),
+		'og:title'            => $title,
+		'og:description'      => $description,
+	);
+
+	$large_image = get_the_post_thumbnail_url( $post );
+
+	if ( empty( $metas['twitter:title'] ) || empty( $metas['twitter:description'] ) ) {
+		return;
+	}
+
+	if ( empty( $large_image ) && empty( $metas['twitter:image'] ) ) {
+		$metas['twitter:card'] = 'summary';
+
+		$small_image = get_site_icon_url( 120 );
+
+		if ( ! empty( $small_image ) ) {
+			$metas['twitter:image'] = esc_url_raw( $small_image );
+			$metas['og:image']      = esc_url_raw( $small_image );
+		}
+	} elseif ( empty( $metas['twitter:image'] ) ) {
+		$metas['twitter:image'] = esc_url_raw( $large_image );
+		$metas['og:image']      = esc_url_raw( $large_image );
+	}
+
+	foreach ( $metas as $meta_name => $meta_content ) {
+		printf( '<meta name="%1$s" content="%2$s">' . "\n", esc_attr( $meta_name ), esc_attr( $meta_content ) );
+	}
+}
+add_action( 'wp_head', 'theme_sharing_cards', 20 );
