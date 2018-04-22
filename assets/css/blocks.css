@@ -175,3 +175,16 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   bottom: 0;
   right: 0;
 }
+
+body:not(.wp-admin) .plugin-card {
+	margin-bottom: 1.5em;
+}
+
+body:not(.wp-admin) .plugin-card button.gh-download-button a {
+	text-decoration: none;
+	box-shadow: none;
+}
+
+body:not(.wp-admin) .plugin-card .download button.button.gh-download-button img {
+	vertical-align: text-bottom;
+}

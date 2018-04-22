@@ -56,6 +56,28 @@ function theme_get_thumbnail_credit( $attr, WP_Post $attachment ) {
 	return $attr;
 }
 
+/**
+ * Makes sure the Entrepôt icon is colored in black.
+ *
+ * @since 1.0.0
+ */
+function theme_print_entrepot_embed_styles() {
+	$post = get_post();
+
+	if ( empty( $post->post_name ) || 'entrepot' !== $post->post_name ) {
+		return;
+	}
+	?>
+	<style type="text/css">
+		body.entrepot .wp-embed-featured-image img {
+			-webkit-filter: invert(100%);
+			filter: invert(100%);
+		}
+	</style>
+	<?php
+}
+add_action( 'embed_head', 'theme_print_entrepot_embed_styles', 20 );
+
 function theme_front_page_hero( $partial = null, $id = 0 ) {
 	if ( is_a( $partial, 'WP_Customize_Partial' ) ) {
 		$id                   = str_replace( 'hero_', '', $partial->id );
