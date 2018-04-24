@@ -179,20 +179,17 @@ if ( ! function_exists( 'theme_email_logo' ) ) :
  * @since  1.0.0
  */
 function theme_email_logo() {
-	if ( ! has_custom_logo() ) {
+	if ( ! has_site_icon() ) {
 		return;
 	}
-
-	// Filter just before the custom logo tag to control its size in pixels.
-	add_filter( 'wp_get_attachment_image_src', 'theme_email_logo_size', 10, 1 );
 	?>
 	<div id="site-logo">
-		<?php the_custom_logo(); ?>
+		<?php printf( '<img src="%1$s" alt="%2$s" width="60px" height="60px" />',
+			get_site_icon_url( 60 ),
+			esc_attr( get_bloginfo( 'name', 'display' ) )
+		); ?>
 	</div>
 	<?php
-
-	// Stop filtering once it's no more needed.
-	remove_filter( 'wp_get_attachment_image_src', 'theme_email_logo_size', 10, 1 );
 }
 
 endif;

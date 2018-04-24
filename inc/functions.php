@@ -318,32 +318,7 @@ add_filter( 'pre_set_theme_mod_db_error_message', 'theme_set_db_error_template',
  * @return boolean True if the email logo should be used. False otherwise.
  */
 function theme_use_email_logo() {
-	return (bool) has_custom_logo() && ! get_theme_mod( 'disable_email_logo' );
-}
-
-/**
- * Makes sure the Logo is 60px wide or tall into the email's header.
- *
- * @since 1.0.0
- *
- * @param  array  $image An array containing the src, width and height in pixels of the image.
- * @return array         An array containing the src, width and height in pixels of the image.
- */
-function theme_email_logo_size( $image = array() ) {
-	if ( isset( $image[1] ) && isset( $image[2] ) ) {
-		$width  = $image[1];
-		$height = $image[2];
-
-		if ( $width > $height ) {
-			$image[2] = floor( ( $height/ $width ) * 60 );
-			$image[1] = 60;
-		} else {
-			$image[1] = floor( ( $width / $height ) * 60 );
-			$image[2] = 60;
-		}
-	}
-
-	return $image;
+	return (bool) has_site_icon() && ! get_theme_mod( 'disable_email_logo' );
 }
 
 /**
