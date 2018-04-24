@@ -67,7 +67,14 @@ if ( post_password_required() ) {
 
 		endif; // Check for have_comments().
 
-		comment_form();
+		comment_form( array(
+			'comment_notes_before' => sprintf( '<p class="description">%1$s <a href="%2$s" class="comment-rss-link"><span class="screen-reader-text">%3$s</span>%4$s</a></p>',
+				esc_html__( 'Rester informé·e des évolutions de la discussion en vous abonnant à son flux :', 'theme' ),
+				get_post_comments_feed_link(),
+				esc_html__( 'Flux RSS des commentaires', 'theme' ),
+				theme_get_icon( theme_icons( home_url( 'feed' ) ) )
+			),
+		) );
 		?>
 	</div><!-- .wrap -->
 </div><!-- #comments -->

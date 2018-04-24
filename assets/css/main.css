@@ -1319,7 +1319,7 @@ body.archive .page-header {
 }
 
 .hentry {
-	margin: 0 0 1.5em;
+	margin: 0 0 2.5em;
 }
 
 .updated:not(.published) {
@@ -1518,6 +1518,15 @@ ol.comment-list li{
 
 .required {
 	color: red;
+}
+
+#respond a.comment-rss-link {
+	text-decoration: none;
+	box-shadow: none;
+}
+
+#respond a.comment-rss-link svg {
+	vertical-align: text-top;
 }
 
 /*--------------------------------------------------------------
