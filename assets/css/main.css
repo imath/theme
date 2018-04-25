@@ -483,24 +483,20 @@ textarea {
 }
 
 @media screen and (min-width: 37.5em) {
-	article.type-page .search-form,
 	.page-content .search-form {
 		display: grid;
 		grid-template-columns: auto 33%;
 		grid-template-areas: "searchfield searchsubmit";
 	}
 
-	article.type-page .search-form label,
 	.page-content .search-form label {
 		grid-area: searchfield;
 	}
 
-	article.type-page .search-form label input[type="search"],
 	.page-content .search-form label input[type="search"] {
 		width: 100%;
 	}
 
-	article.type-page .search-form .search-submit,
 	.page-content .search-form .search-submit {
 		grid-area: searchsubmit;
 	}
