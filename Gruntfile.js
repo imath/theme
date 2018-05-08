@@ -75,6 +75,16 @@ module.exports = function( grunt ) {
 				src: ['assets/css/*.css', '!*.min.css']
 			}
 		},
+		imagemin: {
+			static: {
+				options: {
+					optimizationLevel: 3,
+				},
+				files: {
+					'screenshot.png': 'screenshot.png'
+				}
+			}
+		},
 		jsvalidate:{
 			src: ['js/*.js'],
 			options:{
@@ -98,7 +108,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( 'jstest', ['jsvalidate', 'jshint'] );
 
-	grunt.registerTask( 'shrink', ['cssmin', 'uglify'] );
+	grunt.registerTask( 'shrink', ['cssmin', 'uglify', 'imagemin'] );
 
 	grunt.registerTask( 'compress', ['git-archive'] );
 
