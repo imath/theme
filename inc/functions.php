@@ -773,13 +773,18 @@ add_action( 'signup_blogform',     'theme_signup_form_enqueue_js' );
 add_action( 'signup_extra_fields', 'theme_signup_form_enqueue_js' );
 
 /**
- * Force embed tweets to be centered.
+ * Force embed tweets to be centered & vimeo videos size.
  *
  * @since  1.0.0
  */
 function theme_oembed_fetch_url( $provider = '' ) {
 	if ( false !== strpos( $provider, 'https://publish.twitter.com/oembed' ) ) {
 		$provider = add_query_arg( 'align', 'center', $provider );
+	} elseif ( false !== strpos( $provider, 'https://vimeo.com' ) ) {
+		$provider = add_query_arg( array(
+			'width'  => 740,
+			'height' => 415,
+		), $provider );
 	}
 
 	return $provider;
