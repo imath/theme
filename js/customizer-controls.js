@@ -6,6 +6,7 @@
  * Contains handlers to make Theme Customizer preview reload changes asynchronously.
  */
 
+/* global themeVars */
 ( function( $, api ) {
 	var previousUrl, clearPreviousUrl, setPreviewUrl, previewUrlValue;
 

@@ -1,78 +1,233 @@
-# Copyright (C) 2017 Automattic
-# This file is distributed under the GNU General Public License v2 or later.
+# <!=Copyright (C) 2018 imath
+# This file is distributed under the GNU General Public License v2 or later.=!>
 msgid ""
 msgstr ""
 "Project-Id-Version: Thème 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/tags/_s\n"
-"POT-Creation-Date: 2016-12-23 16:00+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/imath/theme/issues\n"
+"POT-Creation-Date: 2018-05-08 15:03:24+00:00\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
-"Last-Translator:\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"X-Generator: grunt-wp-i18n 0.5.4\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"Last-Translator: imath <contact@imathi.eu>\n"
+"Language-Team: USA <contact@imathi.eu>\n"
+"X-Generator: grunt-wp-i18n1.0.2\n"
 
 #: 404.php:17
-msgid "Oops! That page can&rsquo;t be found."
+msgid "Aïe! Cette page est inexistante."
 msgstr ""
 
-#: 404.php:21
+#: 404.php:23
 msgid ""
-"It looks like nothing was found at this location. Maybe try one of the "
-"links below or a search?"
-msgstr ""
-
-#: 404.php:30
-msgid "Most Used Categories"
-msgstr ""
-
-#: 404.php:47
-#. translators: %1$s: smiley
-msgid "Try looking in the monthly archives. %1$s"
+"Le site n’a pas trouvé ce que vous recherchez. Merci d’essayez l’un des "
+"liens ci-dessous ou d’utiliser le formulaire de recherche."
 msgstr ""
 
 #: comments.php:34
 #. translators: 1: title.
-msgid "One thought on &ldquo;%1$s&rdquo;"
+msgid "Un commentaire sur &ldquo;%1$s&rdquo;"
 msgstr ""
 
-#: comments.php:67
-msgid "Comments are closed."
+#: comments.php:64
+msgid "Les commentaires sont fermés."
 msgstr ""
 
-#: footer.php:18
+#: comments.php:75
+msgid ""
+"Restez informé·e des évolutions de la discussion en vous abonnant à son "
+"flux :"
+msgstr ""
+
+#: comments.php:77
+msgid "Flux RSS des commentaires"
+msgstr ""
+
+#: footer.php:22
 msgid "https://wordpress.org/"
 msgstr ""
 
-#: footer.php:20
+#: footer.php:24
 #. translators: %s: CMS name, i.e. WordPress.
-msgid "Proudly powered by %s"
+msgid "Fièrement propulsé par %s"
 msgstr ""
 
-#: footer.php:25
+#: footer.php:29
 #. translators: 1: Theme name, 2: Theme author.
-msgid "Theme: %1$s by %2$s."
+msgid "Thème: %1$s de %2$s."
 msgstr ""
 
-#: functions.php:47
-msgid "Primary"
+#: functions.php:80
+msgid "Navigation Supérieure"
 msgstr ""
 
-#: functions.php:105
-msgid "Sidebar"
+#: functions.php:81
+msgid "Profils Sociaux"
 msgstr ""
 
-#: functions.php:107
-msgid "Add widgets here."
-msgstr ""
-
-#: header.php:24
+#: header.php:25 page-maintenance.php:22 template-parts/dberror-header.php:20
 msgid "Skip to content"
 msgstr ""
 
-#: header.php:45
-msgid "Primary Menu"
+#: inc/customizer.php:28
+msgid "Maintenance"
+msgstr ""
+
+#: inc/customizer.php:32
+msgid "Pas de maintenance."
+msgstr ""
+
+#: inc/customizer.php:33
+msgid "Maintenance en cours."
+msgstr ""
+
+#: inc/customizer.php:58
+msgid "Theme Options"
+msgstr ""
+
+#: inc/customizer.php:76
+#. translators: %d is the front page section number
+msgid "Contenu de la %de section"
+msgstr ""
+
+#: inc/customizer.php:77
+msgid ""
+"Choisir la page à mettre en une depuis les listes déroulantes. Ajouter une "
+"image à une section en réglant son image à la une dans son écran d'édition. "
+"Les sections vides ne seront pas affichées."
+msgstr ""
+
+#: inc/customizer.php:98
+msgid "Page d’erreur BDD"
+msgstr ""
+
+#: inc/customizer.php:104
+msgid "Erreur de connexion à la base de données"
+msgstr ""
+
+#: inc/customizer.php:110
+msgid "Message d’erreur de la BDD"
+msgstr ""
+
+#: inc/customizer.php:111
+msgid "Personnalisez le message d’erreur de connexion à votre base de données."
+msgstr ""
+
+#: inc/customizer.php:121
+msgid "Modèle d’email"
+msgstr ""
+
+#: inc/customizer.php:133
+msgid "Intégrer le logo du site dans l’e-mail"
+msgstr ""
+
+#: inc/customizer.php:137 inc/customizer.php:155 inc/customizer.php:254
+#: inc/customizer.php:272
+msgid "Oui"
+msgstr ""
+
+#: inc/customizer.php:138 inc/customizer.php:156 inc/customizer.php:253
+#: inc/customizer.php:271
+msgid "Non"
+msgstr ""
+
+#: inc/customizer.php:151
+msgid "Intégrer le nom du site dans l’e-mail"
+msgstr ""
+
+#: inc/customizer.php:168
+msgid "Couleur du texte de l’en-tête"
+msgstr ""
+
+#: inc/customizer.php:180
+msgid "Couleur d’arrière plan de l’en-tête"
+msgstr ""
+
+#: inc/customizer.php:192
+msgid "Couleur de soulignement de l’en-tête"
+msgstr ""
+
+#: inc/customizer.php:204
+msgid "Couleur du texte du corps du message"
+msgstr ""
+
+#: inc/customizer.php:216
+msgid "Couleur d’arrière plan du corps du message"
+msgstr ""
+
+#: inc/customizer.php:228
+msgid "Couleur des liens"
+msgstr ""
+
+#: inc/customizer.php:237 inc/functions.php:827
+msgid "Formulaire de connexion"
+msgstr ""
+
+#: inc/customizer.php:249
+msgid "Remplacer le logo de WordPress par l’icône du site"
+msgstr ""
+
+#: inc/customizer.php:267
+msgid "Intégrer l’arrière plan du site."
+msgstr ""
+
+#: inc/functions.php:139
+msgid "Pied de page (gauche)"
+msgstr ""
+
+#: inc/functions.php:143
+msgid "Pied de page (centre)"
+msgstr ""
+
+#: inc/functions.php:147
+msgid "Pied de page (droite)"
+msgstr ""
+
+#: inc/functions.php:154
+msgid "Ajouter les widgets ici."
+msgstr ""
+
+#: inc/functions.php:502
+msgid "Site en cours de maintenance"
+msgstr ""
+
+#: inc/functions.php:817
+msgid "Modèle d’e-mail"
+msgstr ""
+
+#: inc/functions.php:819
+msgid ""
+"Vous pouvez personnaliser le gabarit utilisé pour envoyer les e-mails de "
+"WordPress."
+msgstr ""
+
+#: inc/functions.php:820
+msgid "Pour cela utilisez la colonne latérale pour spécifier vos préférences."
+msgstr ""
+
+#: inc/functions.php:821
+msgid ""
+"Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
+"certains e-mails."
+msgstr ""
+
+#: inc/functions.php:829
+msgid ""
+"Cet article est utilisé pour personnaliser l’apparence du formulaire de "
+"connexion."
+msgstr ""
+
+#: inc/functions.php:835
+msgid "Page d’erreur de connexion à la base de données"
+msgstr ""
+
+#: inc/functions.php:837
+msgid ""
+"Cet article est utilisé pour personnaliser l’apparence de la page d’erreur "
+"de connexion à la base de données."
+msgstr ""
+
+#: inc/template-functions.php:98
+msgid "Section de la page d'accueil %1$s"
 msgstr ""
 
 #: inc/template-tags.php:52
@@ -82,105 +237,253 @@ msgstr ""
 
 #: inc/template-tags.php:55
 #. translators: 1: list of categories.
-msgid "Posted in %1$s"
+msgid "Publié dans %1$s"
 msgstr ""
 
 #: inc/template-tags.php:62
 #. translators: 1: list of tags.
-msgid "Tagged %1$s"
+msgid "étiquetté %1$s"
 msgstr ""
 
 #: inc/template-tags.php:72
 #. translators: %s: post title
-msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgid "Ajouter un commentaire <span class=\"screen-reader-text\"> à %s</span>"
 msgstr ""
 
-#: inc/template-tags.php:89 template-parts/content-page.php:35
+#: inc/template-tags.php:89
 #. translators: %s: Name of current post. Only visible to screen readers
-msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgid "Modifier <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#: inc/template-tags.php:314 inc/template-tags.php:410
+msgid "Connexion"
+msgstr ""
+
+#: inc/template-tags.php:318
+msgid "Mot de passe oublié"
+msgstr ""
+
+#: inc/template-tags.php:320 inc/template-tags.php:421
+#: template-parts/login-register.php:38
+msgid "Inscription"
+msgstr ""
+
+#: inc/template-tags.php:322
+msgid "Activation"
+msgstr ""
+
+#: inc/template-tags.php:341 page-maintenance.php:39
+msgid "Se connecter"
+msgstr ""
+
+#: inc/template-tags.php:361
+msgid "https://fr.wordpress.org/"
+msgstr ""
+
+#: inc/template-tags.php:382
+msgid "Propulsé par WordPress"
+msgstr ""
+
+#: inc/template-tags.php:415
+msgid "Mot de passe oublié ?"
+msgstr ""
+
+#: page-maintenance.php:30
+msgid "Menu supérieur"
 msgstr ""
 
 #: search.php:21
 #. translators: %s: search query.
-msgid "Search Results for: %s"
+msgid "Résultat(s) de la recherche sur : %s"
 msgstr ""
 
-#: template-parts/content-none.php:14
-msgid "Nothing Found"
+#: template-parts/content-hero.php:28 template-parts/content.php:38
+#. translators: %s: Name of current post. Only visible to screen readers
+msgid "Poursuivre la lecture<span class=\"screen-reader-text\"> de \"%s\"</span>"
 msgstr ""
 
-#: template-parts/content-none.php:25
+#: template-parts/content-none.php:15
+msgid "Aucun contenu n’est disponible pour le moment"
+msgstr ""
+
+#: template-parts/content-none.php:28
 #. translators: 1: link to WP admin new post page.
-msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr ""
-
-#: template-parts/content-none.php:38
 msgid ""
-"Sorry, but nothing matched your search terms. Please try again with some "
-"different keywords."
+"Prêt à publier votre premier article ? <a href=\"%1$s\">Commencez en "
+"cliquant ici</a>."
 msgstr ""
 
-#: template-parts/content-none.php:44
+#: template-parts/content-none.php:41
 msgid ""
-"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
-"searching can help."
+"Désolé, aucun contenu ne correspond à votre recherche. Merci de réessayer "
+"avec d’autres mots clés."
 msgstr ""
 
-#: template-parts/content-page.php:22 template-parts/content.php:45
+#: template-parts/content-none.php:47
+msgid ""
+"Le site n’a pas trouvé ce que vous recherchez. Merci d’utilisez le "
+"formulaire de recherche."
+msgstr ""
+
+#: template-parts/content-page.php:28 template-parts/content.php:49
 msgid "Pages:"
 msgstr ""
 
-#: template-parts/content.php:34
+#: template-parts/content-page.php:42
 #. translators: %s: Name of current post. Only visible to screen readers
-msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#: template-parts/content-widgets.php:14
+msgid "Catégories les plus utilisées :"
+msgstr ""
+
+#: template-parts/content-widgets.php:31
+#. translators: %1$s: smiley
+msgid "Autrement, vous pouvez fouiller dans les archives du site %1$s"
+msgstr ""
+
+#: template-parts/login-header.php:64
+msgid ""
+"Veuillez saisir votre identifiant ou votre adresse de messagerie. Un lien "
+"permettant de créer un nouveau mot de passe vous sera envoyé par e-mail."
+msgstr ""
+
+#: template-parts/login-header.php:68
+msgid "S’inscrire sur ce site"
+msgstr ""
+
+#: template-parts/login-login.php:13 template-parts/login-lostpassword.php:14
+msgid "Nom d’utilisateur ou adresse e-mail"
+msgstr ""
+
+#: template-parts/login-login.php:18
+msgid "Mot de passe"
+msgstr ""
+
+#: template-parts/login-login.php:32
+msgid "Se souvenir de moi"
+msgstr ""
+
+#: template-parts/login-lostpassword.php:27
+msgid "Générer un mot de passe"
+msgstr ""
+
+#: template-parts/login-msregister.php:15
+#. translators: %s: name of the network
+msgid "Obtenez votre propre compte %s en quelques secondes"
+msgstr ""
+
+#: template-parts/login-msregister.php:19
+msgid "Identifiant :"
+msgstr ""
+
+#: template-parts/login-msregister.php:22
+msgid ""
+"(Doit contenir au moins 4 caractères, uniquement des lettres ou des "
+"chiffres.)"
+msgstr ""
+
+#: template-parts/login-msregister.php:24
+msgid "Adresse e-mail :"
+msgstr ""
+
+#: template-parts/login-msregister.php:27
+msgid ""
+"Nous enverrons votre confirmation d’inscription à cette adresse. Vérifiez "
+"donc bien qu’elle est correcte avant de continuer."
+msgstr ""
+
+#: template-parts/login-msregister.php:32
+msgid "Donnez-moi un site !"
+msgstr ""
+
+#: template-parts/login-msregister.php:35
+msgid "Juste l’identifiant, s’il vous plaît."
+msgstr ""
+
+#: template-parts/login-msregister.php:40
+msgid "Suivant"
+msgstr ""
+
+#: template-parts/login-register.php:13
+msgid "Identifiant"
+msgstr ""
+
+#: template-parts/login-register.php:18
+msgid "Adresse de messagerie"
+msgstr ""
+
+#: template-parts/login-register.php:32
+msgid "La confirmation d’inscription vous sera envoyée par e-mail."
+msgstr ""
+
+#: template-parts/navigation-social.php:8
+msgid "Profils sociaux"
+msgstr ""
+
+#: template-parts/navigation-top.php:10
+msgid "Menu"
 msgstr ""
 
 #. Theme Name of the plugin/theme
-msgid "_s"
+msgid "Thème"
 msgstr ""
 
 #. Theme URI of the plugin/theme
-msgid "https://underscores.me/"
+msgid "https://imathi.eu/tag/theme/"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid ""
-"Hi. I'm a starter theme called <code>_s</code>, or <em>underscores</em>, if "
-"you like. I'm a theme meant for hacking so don't use me as a <em>Parent "
-"Theme</em>. Instead try turning me into the next, most awesome, WordPress "
-"theme out there. That's what I'm here for."
+msgid "C'est mon thème !"
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "Automattic"
+msgid "imath"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "https://automattic.com/"
+msgid "https://imathi.eu/"
+msgstr ""
+
+#. Template Name of the plugin/theme
+msgid "Page de recherche"
 msgstr ""
 
 #: comments.php:40
 #. translators: 1: comment count number, 2: title.
 msgctxt "comments title"
-msgid "%1$s thought on &ldquo;%2$s&rdquo;"
-msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgid "%1$s commentaire sur &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s commentaires sur &ldquo;%2$s&rdquo;"
 msgstr[0] ""
 msgstr[1] ""
+
+#: inc/functions.php:51
+#. Translators: If there are characters in your language that are not supported
+#. by Karla, translate this to 'off'. Do not translate into your own language.
+msgctxt "Noto Serif font: on or off"
+msgid "on"
+msgstr ""
 
 #: inc/template-tags.php:29
 #. translators: %s: post date.
 msgctxt "post date"
-msgid "Posted on %s"
+msgid "Publié le %s"
 msgstr ""
 
 #: inc/template-tags.php:35
 #. translators: %s: post author.
 msgctxt "post author"
-msgid "by %s"
+msgid "par %s"
 msgstr ""
 
 #: inc/template-tags.php:59
 #. translators: used between list items, there is a space after the comma
 msgctxt "list item separator"
 msgid ", "
+msgstr ""
+
+#: template-parts/login-footer.php:20
+msgctxt "site"
+msgid "&larr; Retour vers %s"
 msgstr ""

@@ -25,11 +25,11 @@
 
 		if ( window.pageYOffset >= header.clientHeight - nav[0].clientHeight ) {
 			if ( ! cL.contains( 'site-navigation-fixed' ) ) {
-				cL.add( 'site-navigation-fixed' )
+				cL.add( 'site-navigation-fixed' );
 			}
 		} else {
 			if ( cL.contains( 'site-navigation-fixed' ) ) {
-				cL.remove( 'site-navigation-fixed' )
+				cL.remove( 'site-navigation-fixed' );
 			}
 		}
 	};

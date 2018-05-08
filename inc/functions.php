@@ -104,11 +104,12 @@ add_action( 'wp_enqueue_scripts', 'theme_styles' );
  * @since 1.0.0
  */
 function theme_scripts() {
+	$min = theme_js_css_suffix();
 	$t = theme();
 
 	wp_enqueue_script(
 		'theme-navigation',
-		get_template_directory_uri() . '/js/navigation.js',
+		get_template_directory_uri() . "/js/navigation{$min}.js",
 		array(),
 		$t->version,
 		true
@@ -116,7 +117,7 @@ function theme_scripts() {
 
 	wp_enqueue_script(
 		'theme-skip-link-focus-fix',
-		get_template_directory_uri() . '/js/skip-link-focus-fix.js',
+		get_template_directory_uri() . "/js/skip-link-focus-fix{$min}.js",
 		array(),
 		$t->version,
 		true

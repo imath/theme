@@ -95,7 +95,7 @@ function theme_front_page_hero( $partial = null, $id = 0 ) {
 		wp_reset_postdata();
 	} elseif ( is_customize_preview() ) {
 		// The output placeholder anchor.
-		echo '<article class="hero-placeholder hero theme-hero" id="hero' . $id . '"><span class="theme-hero-title">' . sprintf( __( 'Section de la page d\'accueil %1$s', 'twentyseventeen' ), $id ) . '</span></article>';
+		echo '<article class="hero-placeholder hero theme-hero" id="hero' . $id . '"><span class="theme-hero-title">' . sprintf( __( 'Section de la page d\'accueil %1$s', 'theme' ), $id ) . '</span></article>';
 	}
 }
 
