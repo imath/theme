@@ -21,12 +21,16 @@
 				<div class="site-info">
 					<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'theme' ) ); ?>"><?php
 						/* translators: %s: CMS name, i.e. WordPress. */
-						printf( esc_html__( 'Fièrement propulsé par %s', 'theme' ), 'WordPress' );
+						printf( esc_html__( 'Propulsé par %s', 'theme' ), 'WordPress' );
 					?></a>
 					<span class="sep"> | </span>
 					<?php
 						/* translators: 1: Theme name, 2: Theme author. */
 						printf( esc_html__( 'Thème: %1$s de %2$s.', 'theme' ), '<i>Thème</i>', '<a href="https://imathi.eu/">imath</a>' );
+
+						if ( function_exists( 'the_privacy_policy_link' ) ) {
+							the_privacy_policy_link( '<span class="sep"> | </span>', '' );
+						}
 					?>
 				</div><!-- .site-info -->
 			</div><!-- .wrap -->
