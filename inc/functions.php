@@ -730,6 +730,14 @@ function theme_login_style() {
 			body.login p#nav a, body.login p#backtoblog a {
 				color: #23282d;
 			}
+
+			body.login .privacy-policy-link,
+			body.login .privacy-policy-link:hover,
+			body.login .privacy-policy-link:visited,
+			body.login .privacy-policy-link:focus {
+				color: #fff;
+				text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+			}
 		', $custom_header->url );
 	}
 

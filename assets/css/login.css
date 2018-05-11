@@ -16,7 +16,7 @@
 	border-color: #23282d !important;
 }
 
-a:focus {
+a:not(.privacy-policy-link):focus {
 	color: #23282d !important;
 	-webkit-box-shadow: none !important;
 	box-shadow: none !important;
