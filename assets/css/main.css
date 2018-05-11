@@ -1313,6 +1313,10 @@ body.front-page article.theme-hero:nth-child(even) .hero-content a:hover {
 	box-shadow: inset 0 -1px 0 rgba(250, 250, 250, 1);
 }
 
+body.front-page article.theme-hero:nth-child(odd) .has-2-columns p {
+	display: none;
+}
+
 @media screen and (min-width: 37.5em) {
 	body.front-page article.theme-hero.has-post-thumbnail .wrap {
 		display: grid;
@@ -1341,6 +1345,10 @@ body.front-page article.theme-hero:nth-child(even) .hero-content a:hover {
 
 	body.front-page article.theme-hero.has-post-thumbnail .entry-header {
 		text-align: left;
+	}
+
+	body.front-page article.theme-hero:nth-child(odd) .has-2-columns p {
+		display: block;
 	}
 }
 
