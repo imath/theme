@@ -76,9 +76,9 @@ module.exports = function( grunt ) {
 			}
 		},
 		imagemin: {
-			static: {
+			theme: {
 				options: {
-					optimizationLevel: 3,
+					optimizationLevel: 3
 				},
 				files: {
 					'screenshot.png': 'screenshot.png'
