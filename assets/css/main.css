@@ -1490,6 +1490,18 @@ ol.comment-list li{
 	box-shadow: none;
 }
 
+p.comment-awaiting-moderation {
+	font-style: italic;
+	background-color: #eee;
+	padding-left: 0.4em;
+	padding-right: 0.4em;
+}
+
+:target > .comment-body {
+	border-left: 4px solid #044f51;
+	padding-left: 70px;
+}
+
 /*--------------------------------------------------------------
 ## Comment form
 --------------------------------------------------------------*/
