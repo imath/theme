@@ -303,13 +303,26 @@ function theme_sharing_cards() {
 		'og:description'      => $description,
 	);
 
-	$large_image = get_the_post_thumbnail_url( $post );
+	$thumbnail = get_the_post_thumbnail_url( $post );
+
+	// No thumbnail ? Try to pick the first image in the content.
+	if ( ! $thumbnail ) {
+		preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $images );
+
+		if ( isset( $images[1] ) ) {
+			if ( is_array( $images[1] ) ) {
+				$thumbnail = reset( $images[1] );
+			} else {
+				$thumbnail = $images[1];
+			}
+		}
+	}
 
 	if ( empty( $metas['twitter:title'] ) || empty( $metas['twitter:description'] ) ) {
 		return;
 	}
 
-	if ( empty( $large_image ) && empty( $metas['twitter:image'] ) ) {
+	if ( empty( $thumbnail ) && empty( $metas['twitter:image'] ) ) {
 		$metas['twitter:card'] = 'summary';
 
 		$small_image = get_site_icon_url( 120 );
@@ -319,8 +332,8 @@ function theme_sharing_cards() {
 			$metas['og:image']      = esc_url_raw( $small_image );
 		}
 	} elseif ( empty( $metas['twitter:image'] ) ) {
-		$metas['twitter:image'] = esc_url_raw( $large_image );
-		$metas['og:image']      = esc_url_raw( $large_image );
+		$metas['twitter:image'] = esc_url_raw( $thumbnail );
+		$metas['og:image']      = esc_url_raw( $thumbnail );
 	}
 
 	foreach ( $metas as $meta_name => $meta_content ) {
