@@ -116,9 +116,22 @@ final class Theme {
 
 		// Gutenberg Theme features
 		add_theme_support( 'editor-color-palette',
-			'#23282d',
-			'#eee',
-			'#444'
+			array(
+				'name'  => 'very dark blue',
+				'color' => '#23282d',
+			),
+			array(
+				'name'  => 'very light gray',
+				'color' => '#eee',
+			),
+			array(
+				'name'  => 'very dark gray',
+				'color' => '#444',
+			),
+			array(
+				'name'  => 'very dark cyan',
+				'color' => '#044f51',
+			)
 		);
 
 		add_theme_support( 'align-wide' );
