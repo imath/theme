@@ -115,26 +115,31 @@ final class Theme {
 		) );
 
 		// Gutenberg Theme features
-		add_theme_support( 'editor-color-palette',
+		add_theme_support( 'editor-color-palette', array(
 			array(
-				'name'  => 'very dark blue',
+				'slug'  => 'very-dark-blue',
+				'name'  => __( 'Bleu très foncé', 'theme' ),
 				'color' => '#23282d',
 			),
 			array(
-				'name'  => 'very light gray',
+				'slug'  => 'very-light-gray',
+				'name'  => __( 'Gris très léger', 'theme' ),
 				'color' => '#eee',
 			),
 			array(
-				'name'  => 'very dark gray',
+				'slug'  => 'very-dark-gray',
+				'name'  => __( 'Gris très foncé', 'theme' ),
 				'color' => '#444',
 			),
 			array(
-				'name'  => 'very dark cyan',
+				'slug'  => 'very-dark-cyan',
+				'name'  => __( 'Cyan très foncé', 'theme' ),
 				'color' => '#044f51',
-			)
-		);
+			),
+		) );
 
 		add_theme_support( 'align-wide' );
+		add_theme_support( 'wp-block-styles' );
 	}
 
 	/**
