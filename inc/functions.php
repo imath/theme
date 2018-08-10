@@ -870,3 +870,17 @@ function theme_upgrade_theme() {
 	update_option( 'theme_version', $version );
 }
 add_action( 'admin_init', 'theme_upgrade_theme', 1000 );
+
+/**
+ * Reverse the order when the TuttoGuts are displayed.
+ *
+ * @since 1.0.2
+ */
+function theme_tuttogut_reverse_order( WP_Query $wp_query ) {
+	if ( 'tuttogut' !== $wp_query->get( 'tag' ) ) {
+		return;
+	}
+
+	$wp_query->set( 'order', 'ASC' );
+}
+add_action( 'pre_get_posts', 'theme_tuttogut_reverse_order', 10, 1 );

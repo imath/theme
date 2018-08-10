@@ -341,3 +341,29 @@ function theme_sharing_cards() {
 	}
 }
 add_action( 'wp_head', 'theme_sharing_cards', 20 );
+
+/**
+ * Get The RSS svg for the TuttoGut tag
+ *
+ * @since 1.0.2
+ */
+function tuttogut_get_rss_svg() {
+    $icons = theme_icons();
+    return theme_get_icon( $icons[ home_url( 'feed' ) ] );
+}
+
+ /**
+ * Filter to only keep the tag title
+ *
+ * @since 1.0.2
+ */
+function tuttogut_get_tag_title( $title = '' ) {
+    $title = single_tag_title( '', false );
+    $rss = sprintf( __( '<a href="%1$s" title="Abonnez vous à %2$s" class="tag-rss-header">%3$s</a>', 'theme' ),
+        esc_url( get_tag_feed_link( get_queried_object()->term_id ) ),
+        $title,
+        tuttogut_get_rss_svg()
+    );
+
+    return $title . ' ' . $rss;
+}

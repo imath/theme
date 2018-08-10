@@ -15,6 +15,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 # Alignments
 # Widgets
 # Content
+	## Archive Loops
 	## Posts and pages
 	## Comments
 # Infinite scroll
@@ -1358,6 +1359,27 @@ body.front-page article.theme-hero:nth-child(odd) .has-2-columns p {
 body.archive .page-header {
 	padding: 1em 0;
 	border-bottom: solid 1px #23282d;
+}
+
+body.tag-tuttogut .page-header {
+	background-color: #044f51;
+	color: #FFF;
+	text-align: center;
+}
+
+body.tag .tag-header-logo  {
+	max-width: 200px;
+	height: auto;
+	display: block;
+	margin: 0 auto;
+}
+
+body.tag .tag-rss-header {
+	box-shadow: inset 0 -1px 0 #FFF;
+}
+
+body.tag .tag-rss-header svg path {
+	fill: #FFF;
 }
 
 /*--------------------------------------------------------------
