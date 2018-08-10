@@ -159,6 +159,12 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   }
 }
 
+@media screen and (max-width: 768px) {
+  .wp-block-gallery .blocks-gallery-item {
+    width: calc(100% / 1 - 16px);
+  }
+}
+
 .wp-block-embed.type-video > .wp-block-embed__wrapper {
   position: relative;
   width: 100%;
@@ -228,4 +234,16 @@ body:not(.wp-admin) .plugin-card .download button.button.gh-download-button img 
 .entry-content p.has-very-dark-cyan-background-color {
 	padding-left: 0.4em;
 	padding-right: 0.4em;
+}
+
+/* TuttoGut */
+article.tag-tuttogut .wp-block-gallery .blocks-gallery-item figcaption {
+  padding-top: 10px;
+  background: none;
+  color: #444;
+  font-style: italic;
+}
+
+article.tag-tuttogut .blocks-gallery-item img {
+  padding-bottom: 35px;
 }
