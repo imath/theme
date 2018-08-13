@@ -163,6 +163,10 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   .wp-block-gallery .blocks-gallery-item {
     width: calc(100% / 1 - 16px);
   }
+
+  .wp-block-columns {
+    display: block;
+  }
 }
 
 .wp-block-embed.type-video > .wp-block-embed__wrapper {
