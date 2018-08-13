@@ -53,7 +53,7 @@ final class Theme {
 	 * @since  1.0.0
 	 */
 	private function supports() {
-		$this->version = '1.0.2';
+		$this->version = '1.0.3';
 		$GLOBALS['content_width'] = 640;
 
 		// Add default posts and comments RSS feed links to head.
