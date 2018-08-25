@@ -38,10 +38,6 @@
   list-style-position: outside;
 }
 
-.wp-block-video video {
-  max-width: 740px;
-}
-
 .wp-block-quote:not(.is-large) {
 	border-left: 4px solid #000;
 	padding-left: 1em;
@@ -157,15 +153,23 @@ ul.wp-block-latest-posts.is-grid.alignwide {
     padding-left: 0px;
     padding-right: 0px;
   }
+
+  .wp-block-video video {
+		max-width: 740px;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .wp-block-gallery .blocks-gallery-item {
-    width: calc(100% / 1 - 16px);
+	  width: calc(100% / 1 - 16px);
   }
 
   .wp-block-columns {
     display: block;
+  }
+
+  .wp-block-cover-image.has-parallax {
+		background-attachment: initial;
   }
 }
 
