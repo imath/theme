@@ -91,6 +91,12 @@
   max-width: 100%;
 }
 
+.wp-block-image {
+	width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 .wp-block-image.aligncenter img {
 	margin: 0 auto;
 }
@@ -156,6 +162,10 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 
   .wp-block-video video {
 		max-width: 740px;
+  }
+
+  .wp-block-image.alignfull img, .wp-block-image.alignwide img {
+  	width: inherit;
   }
 }
 
