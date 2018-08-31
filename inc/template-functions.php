@@ -275,45 +275,78 @@ function theme_ms_register_header( $hook = 'do_signup_header' ) {
  * @return string Facbook OG & Twitter meta tags.
  */
 function theme_sharing_cards() {
-	if ( ! is_singular() || is_customize_preview() ) {
+	if ( ( ! is_category() && ! is_tag() && ! is_singular() ) || is_customize_preview() ) {
 		return;
 	}
-
-	$post = get_post();
-
-	if ( ! empty( $post->post_excerpt ) ) {
-		$description = strip_shortcodes( $post->post_excerpt );
-	} elseif ( ! empty( $post->post_content ) ) {
-		$description = strip_shortcodes( $post->post_content );
-	} else {
-		$description = get_bloginfo( 'description' );
-	}
-
-	$title       = wp_strip_all_tags( apply_filters( 'the_title', $post->post_title, $post->ID ) );
-	$description = wp_strip_all_tags( apply_filters( 'the_excerpt', wp_trim_words( $description, 40, '...' ) ) );
 
 	$metas = array(
 		'twitter:card'        => 'summary_large_image',
 		'twitter:site'        => '@imath',
-		'twitter:title'       => $title,
-		'twitter:description' => $description,
-		'og:url'              => esc_url_raw( get_permalink( $post ) ),
-		'og:type'             => esc_attr( get_post_type( $post ) ),
-		'og:title'            => $title,
-		'og:description'      => $description,
+		'twitter:title'       => '',
+		'twitter:description' => '',
+		'og:url'              => '',
+		'og:type'             => '',
+		'og:title'            => '',
+		'og:description'      => '',
 	);
 
-	$thumbnail = get_the_post_thumbnail_url( $post );
+	if ( is_tag() || is_category() ) {
+		$object = get_queried_object();
 
-	// No thumbnail ? Try to pick the first image in the content.
-	if ( ! $thumbnail ) {
-		preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $images );
+		$title       = wp_strip_all_tags( $object->name );
+		$description = wp_strip_all_tags( $object->description );
+		$taxonomy    = get_taxonomy( $object->taxonomy );
 
-		if ( isset( $images[1] ) ) {
-			if ( is_array( $images[1] ) ) {
-				$thumbnail = reset( $images[1] );
-			} else {
-				$thumbnail = $images[1];
+		$metas = array_merge( $metas, array(
+			'twitter:title'       => $title,
+			'twitter:description' => $description,
+			'og:url'              => esc_url_raw( get_term_link( $object ) ),
+			'og:type'             => wp_strip_all_tags( $taxonomy->labels->singular_name ),
+			'og:title'            => $title,
+			'og:description'      => $description,
+		) );
+
+		if ( file_exists( get_parent_theme_file_path( '/assets/images/' . $object->slug . '.jpg' ) ) ) {
+			$thumbnail = get_parent_theme_file_uri( '/assets/images/' . $object->slug . '.jpg' );
+		}
+
+	} else {
+		$post = get_post();
+
+		if ( ! empty( $post->post_excerpt ) ) {
+			$description = strip_shortcodes( $post->post_excerpt );
+		} elseif ( ! empty( $post->post_content ) ) {
+			$description = strip_shortcodes( $post->post_content );
+		} else {
+			$description = get_bloginfo( 'description' );
+		}
+
+		$title       = wp_strip_all_tags( apply_filters( 'the_title', $post->post_title, $post->ID ) );
+		$description = wp_strip_all_tags( apply_filters( 'the_excerpt', wp_trim_words( $description, 40, '...' ) ) );
+
+		$metas = array(
+			'twitter:card'        => 'summary_large_image',
+			'twitter:site'        => '@imath',
+			'twitter:title'       => $title,
+			'twitter:description' => $description,
+			'og:url'              => esc_url_raw( get_permalink( $post ) ),
+			'og:type'             => esc_attr( get_post_type( $post ) ),
+			'og:title'            => $title,
+			'og:description'      => $description,
+		);
+
+		$thumbnail = get_the_post_thumbnail_url( $post );
+
+		// No thumbnail ? Try to pick the first image in the content.
+		if ( ! $thumbnail ) {
+			preg_match_all( '/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $images );
+
+			if ( isset( $images[1] ) ) {
+				if ( is_array( $images[1] ) ) {
+					$thumbnail = reset( $images[1] );
+				} else {
+					$thumbnail = $images[1];
+				}
 			}
 		}
 	}

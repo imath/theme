@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2 or later.=!>
 msgid ""
 msgstr ""
-"Project-Id-Version: Thème 1.0.4\n"
+"Project-Id-Version: Thème 1.0.5\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/theme/issues\n"
-"POT-Creation-Date: 2018-08-25 13:02:35+00:00\n"
+"POT-Creation-Date: 2018-08-31 19:41:04+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -246,7 +246,7 @@ msgstr ""
 msgid "Section de la page d'accueil %1$s"
 msgstr ""
 
-#: inc/template-functions.php:362
+#: inc/template-functions.php:395
 msgid ""
 "<a href=\"%1$s\" title=\"Abonnez vous à %2$s\" "
 "class=\"tag-rss-header\">%3$s</a>"
