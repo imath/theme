@@ -20,7 +20,8 @@
 .wp-block-verse,
 .wp-block-gutenblocks-photo,
 .wp-block-gutenblocks-gist,
-.wp-block-columns {
+.wp-block-columns,
+.wp-block-file {
   margin: 1.5em auto;
   max-width: 740px;
   padding-left: 20px;
@@ -117,13 +118,8 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 }
 
 .wp-block-table {
-  display: block;
-  overflow-x: auto;
-}
-
-.wp-block-table table {
   border-collapse: collapse;
-  width: 100%
+  width: 100%;
 }
 
 .wp-block-table td, .wp-block-table th {
@@ -167,6 +163,33 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   .wp-block-image.alignfull img, .wp-block-image.alignwide img {
   	width: inherit;
   }
+
+  .wp-block-file {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.wp-block-video {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.wp-block-video.alignwide {
+		margin: 1.5em auto;
+		max-width: 1100px;
+	}
+
+	.wp-block-video.alignfull {
+		margin: 1.5em 0;
+		max-width: 100%;
+	}
+
+	.wp-block-video.alignwide video,
+	.wp-block-video.alignfull video {
+		max-width: 100%;
+		margin: 0 auto;
+    display: block;
+	}
 }
 
 @media screen and (max-width: 768px) {
@@ -180,6 +203,14 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 
   .wp-block-cover-image.has-parallax {
 		background-attachment: initial;
+  }
+
+  .wp-block-table {
+    display: inline-block;
+    vertical-align: top;
+    max-width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }
 

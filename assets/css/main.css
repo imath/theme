@@ -1406,7 +1406,7 @@ body.tag .tag-rss-header svg path {
 .page-content p,
 .entry-content p,
 .entry-summary p {
-	text-align: justify;
+	text-align: left;
 }
 
 .entry-summary p {
