@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2 or later.=!>
 msgid ""
 msgstr ""
-"Project-Id-Version: Thème 1.0.6\n"
+"Project-Id-Version: Thème 1.0.7\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/theme/issues\n"
-"POT-Creation-Date: 2019-05-08 07:57:00+00:00\n"
+"POT-Creation-Date: 2019-11-14 06:15:49+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -174,7 +174,7 @@ msgstr ""
 msgid "Couleur des liens"
 msgstr ""
 
-#: inc/customizer.php:237 inc/functions.php:841
+#: inc/customizer.php:237 inc/functions.php:846
 msgid "Formulaire de connexion"
 msgstr ""
 
@@ -202,41 +202,41 @@ msgstr ""
 msgid "Ajouter les widgets ici."
 msgstr ""
 
-#: inc/functions.php:503
+#: inc/functions.php:505
 msgid "Site en cours de maintenance"
 msgstr ""
 
-#: inc/functions.php:831
+#: inc/functions.php:836
 msgid "Modèle d’e-mail"
 msgstr ""
 
-#: inc/functions.php:833
+#: inc/functions.php:838
 msgid ""
 "Vous pouvez personnaliser le gabarit utilisé pour envoyer les e-mails de "
 "WordPress."
 msgstr ""
 
-#: inc/functions.php:834
+#: inc/functions.php:839
 msgid "Pour cela utilisez la colonne latérale pour spécifier vos préférences."
 msgstr ""
 
-#: inc/functions.php:835
+#: inc/functions.php:840
 msgid ""
 "Voici comment seront affichés les <a href=\"#\">liens</a> contenus dans "
 "certains e-mails."
 msgstr ""
 
-#: inc/functions.php:843
+#: inc/functions.php:848
 msgid ""
 "Cet article est utilisé pour personnaliser l’apparence du formulaire de "
 "connexion."
 msgstr ""
 
-#: inc/functions.php:849
+#: inc/functions.php:854
 msgid "Page d’erreur de connexion à la base de données"
 msgstr ""
 
-#: inc/functions.php:851
+#: inc/functions.php:856
 msgid ""
 "Cet article est utilisé pour personnaliser l’apparence de la page d’erreur "
 "de connexion à la base de données."
