@@ -490,6 +490,8 @@ function theme_is_main_site() {
  *                          An array containing a Maintenance Post otherwise.
  */
 function theme_maintenance_posts_pre_query( $return = null, WP_Query $wq ) {
+	global $post;
+
 	if ( ! $wq->is_main_query() || true === $wq->get( 'suppress_filters' ) || is_admin() ) {
 		return $return;
 	}
@@ -524,6 +526,9 @@ function theme_maintenance_posts_pre_query( $return = null, WP_Query $wq ) {
 	) as $key => $conditional_tag ) {
 		$wq->{$key} = (bool) $conditional_tag;
 	}
+
+	// Prevent a notice error.
+	$post = $wq->queried_object;
 
 	return $wq->posts;
 }
