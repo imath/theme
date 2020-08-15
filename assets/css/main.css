@@ -1512,10 +1512,26 @@ ol.comment-list li{
 
 .comment-author .avatar {
 	height: 50px;
-	left: -65px;
-	position: absolute;
 	width: 50px;
 	border-radius: 50%;
+	position: absolute;
+	left: 0;
+}
+
+.comment-author b.fn,
+.comment-metadata {
+	margin-left: 65px;
+}
+
+@media screen and (min-width: 37.5em) {
+	.comment-author .avatar {
+		left: -65px;
+	}
+
+	.comment-author b.fn,
+	.comment-metadata {
+		margin-left: 0px;
+	}
 }
 
 .comment-author .says {
