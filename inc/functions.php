@@ -440,9 +440,9 @@ function theme_email_set_html_content( $text ) {
  *
  * @since 1.0.0
  *
- * @param PHPMailer $phpmailer The Mailer class.
+ * @param object $phpmailer The Mailer class.
  */
-function theme_mailer_init( PHPMailer $phpmailer ) {
+function theme_mailer_init( $phpmailer = null ) {
 	if ( empty( $phpmailer->Body ) ) {
 		return;
 	}
