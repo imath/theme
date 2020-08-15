@@ -1596,6 +1596,10 @@ p.comment-awaiting-moderation {
 	line-height: 1.714285714;
 }
 
+#respond form label[for="wp-comment-cookies-consent"] {
+	display: inline;
+}
+
 #respond form input[type="text"],
 #respond form input[type="email"],
 #respond form input[type="url"],
@@ -1603,7 +1607,7 @@ p.comment-awaiting-moderation {
 	width: 100%;
 }
 
-#respond form input[type="checkbox"] {
+#respond form input[type="checkbox"]:not( #wp-comment-cookies-consent ) {
 	margin-right: 1em;
 }
 
