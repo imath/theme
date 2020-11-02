@@ -77,8 +77,11 @@ if ( post_password_required() ) {
 					esc_html__( 'Flux RSS des commentaires', 'theme' ),
 					theme_get_icon( theme_icons( home_url( 'feed' ) ) )
 				),
-				'id_form'              => 'theme-comment-form',
 			);
+		}
+
+		if ( is_singular() ) {
+			$comment_fields['id_form'] = 'theme-comment-form';
 
 			if ( ! is_user_logged_in() ) {
 				$comment_fields['class_submit'] = 'submit g-recaptcha';
