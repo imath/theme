@@ -5,7 +5,7 @@
   },
   "description": "The theme of my website.",
   "devDependencies": {
-    "grunt": "^1.0.4",
+    "grunt": "~1.1.0",
     "grunt-check-dependencies": "~1.0.0",
     "grunt-checktextdomain": "~1.0.1",
     "grunt-contrib-clean": "~1.1.0",
@@ -23,7 +23,8 @@
     "matchdep": "^2.0.0"
   },
   "engines": {
-    "node": ">=6.9.1"
+    "node": "12.16.0",
+    "npm": "6.14.0"
   },
   "keywords": [
     "gutenberg",
@@ -36,5 +37,5 @@
     "type": "git",
     "url": "https://github.com/imath/theme.git"
   },
-  "version": "1.0.8"
+  "version": "1.1.0"
 }

@@ -123,8 +123,43 @@ function theme_scripts() {
 		true
 	);
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
+	if ( is_singular() && comments_open() ) {
+		if ( ! is_user_logged_in() ) {
+			wp_enqueue_script(
+				'theme-recaptcha',
+				sprintf( 'https://www.google.com/recaptcha/api.js?onload=themeCommentonSubmit&render=%s', G_RECAPTCHA_KEY ),
+				'array',
+				3,
+				true
+			);
+
+			wp_add_inline_script(
+				'theme-recaptcha',
+				sprintf(
+					'( function() {
+						window.themeCommentonSubmit = function() {
+							grecaptcha.ready( function() {
+								grecaptcha.execute( \'%s\', {
+									action: \'submit\'
+								} ).then( function( token ) {
+									// Add the token to the "primary" form
+									var input = document.createElement( \'input\' );
+									input.setAttribute( \'type\', \'hidden\' );
+									input.setAttribute( \'name\', \'_themeCaptcha_v3_token\' );
+									input.setAttribute( \'value\', token );
+									document.getElementById( \'theme-comment-form\' ).appendChild( input );
+								} );
+							} );
+						}
+					} )();',
+					G_RECAPTCHA_KEY
+				)
+			);
+		}
+
+		if ( get_option( 'thread_comments' ) ) {
+			wp_enqueue_script( 'comment-reply' );
+		}
 	}
 }
 add_action( 'wp_enqueue_scripts', 'theme_scripts', 11 );
@@ -889,3 +924,55 @@ function theme_tuttogut_reverse_order( WP_Query $wp_query ) {
 	$wp_query->set( 'order', 'ASC' );
 }
 add_action( 'pre_get_posts', 'theme_tuttogut_reverse_order', 10, 1 );
+
+/**
+ * Check the reCaptcha score before inserting the comment.
+ *
+ * @since 1.1.0
+ *
+ * @param array $comment_data The comment data.
+ * @param array The comment data.
+ */
+function theme_preprocess_comment( $comment_data = array() ) {
+	if ( is_user_logged_in() ) {
+		return $comment_data;
+	}
+
+	if ( isset( $_POST['_themeCaptcha_v3_token'] ) ) {
+		$verify = array(
+			'secret'   => G_RECAPTCHA_SECRET,
+			'remoteip' => $_SERVER['REMOTE_ADDR'],
+			'response' => wp_unslash( $_POST['_themeCaptcha_v3_token'] ),
+		);
+
+		$resp = wp_remote_post( 'https://www.google.com/recaptcha/api/siteverify', array( 'body' => $verify ) );
+		if ( is_wp_error( $resp ) || 200 != wp_remote_retrieve_response_code( $resp ) ) {
+			$comment_data = array();
+		}
+
+		$result = json_decode( wp_remote_retrieve_body( $resp ), true );
+
+		if ( ! isset( $result['success'] ) || true !== $result['success'] || ! isset( $result['score'] ) || 0.8 > $result['score'] ) {
+			$comment_data = array();
+		} else {
+			$comment_data['comment_meta'] = array(
+				'_recaptcha_score' => $result['score'],
+			);
+		}
+	}
+
+	if ( ! $comment_data ) {
+		wp_die(
+			'<h1>' . esc_html__( 'La vérification de votre commentaire a échoué.', 'theme' ) . '</h1>' .
+			'<p>' . esc_html__( 'Assurez-vous que JavaScript soit bien activé sur votre navigateur avant se soumettre à nouveau votre commentaire. Si vous êtes un spammeur, merci de vous abstenir !', 'theme' ) . '</p>',
+			__( 'Ouch!', 'theme' ),
+			array(
+				'response'          => 403,
+				'back_link'         => 1,
+			)
+		);
+	}
+
+	return $comment_data;
+}
+add_action( 'preprocess_comment', 'theme_preprocess_comment', 0, 1 );
