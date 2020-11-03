@@ -19,7 +19,7 @@
 				endif; ?>
 
 				<div class="site-info">
-					<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'theme' ) ); ?>"><?php
+					<a href="<?php echo esc_url( __( 'https://fr.wordpress.org/', 'theme' ) ); ?>"><?php
 						/* translators: %s: CMS name, i.e. WordPress. */
 						printf( esc_html__( 'Propulsé par %s', 'theme' ), 'WordPress' );
 					?></a>

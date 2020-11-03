@@ -55,7 +55,7 @@ function theme_customize_register( $wp_customize ) {
 	 */
 	$wp_customize->add_section(
 		'theme_options', array(
-			'title'    => __( 'Theme Options', 'theme' ),
+			'title'    => __( 'Options du thème', 'theme' ),
 			'priority' => 130, // Before Additional CSS.
 		)
 	);
