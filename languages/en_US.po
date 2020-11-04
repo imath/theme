@@ -4,20 +4,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thème 1.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/theme/issues\n"
-"POT-Creation-Date: 2020-11-03 20:42:54+00:00\n"
-"PO-Revision-Date: 2020-11-03 21:44+0100\n"
+"POT-Creation-Date: 2020-11-04 11:59:00+00:00\n"
+"PO-Revision-Date: 2020-11-04 13:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: USA <contact@imathi.eu>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: 404.php:17
 msgid "Aïe! Cette page est inexistante."
-msgstr "Ouch! This page doesn’t exist"
+msgstr "Ouch! This page doesn’t exist."
 
 #: 404.php:23
 msgid ""
@@ -187,7 +187,7 @@ msgstr "Login form"
 
 #: inc/customizer.php:249
 msgid "Remplacer le logo de WordPress par l’icône du site"
-msgstr "Replace the WordPress logo with the site’s icon."
+msgstr "Replace the WordPress logo with the site’s icon"
 
 #: inc/customizer.php:267
 msgid "Intégrer l’arrière plan du site."
@@ -294,7 +294,7 @@ msgstr "Published in %1$s"
 #. translators: 1: list of tags.
 #: inc/template-tags.php:62
 msgid "étiquetté %1$s"
-msgstr "Tagged %1$s"
+msgstr "tagged %1$s"
 
 #. translators: %s: post title
 #: inc/template-tags.php:72
@@ -359,7 +359,7 @@ msgstr "No content is available so far"
 msgid ""
 "Prêt à publier votre premier article ? <a href=\"%1$s\">Commencez en "
 "cliquant ici</a>."
-msgstr "Ready to publish your first post? <a href=\"%1$s\">Start here</a>"
+msgstr "Ready to publish your first post? <a href=\"%1$s\">Start here</a>."
 
 #: template-parts/content-none.php:41
 msgid ""
@@ -517,7 +517,7 @@ msgstr[1] "%1$s comments on &ldquo;%2$s&rdquo;"
 #: inc/functions.php:51
 msgctxt "Noto Serif font: on or off"
 msgid "on"
-msgstr "On"
+msgstr "on"
 
 #. translators: %s: post date.
 #: inc/template-tags.php:29
@@ -529,7 +529,7 @@ msgstr "Published on %s"
 #: inc/template-tags.php:35
 msgctxt "post author"
 msgid "par %s"
-msgstr "by %s "
+msgstr "by %s"
 
 #. translators: used between list items, there is a space after the comma
 #: inc/template-tags.php:59
