@@ -959,7 +959,7 @@ function theme_preprocess_comment( $comment_data = array() ) {
 				'_recaptcha_score' => $result['score'],
 			);
 		}
-	} elseif ( empty( $comment_data['comment_type'] ) || 'comment' === $comment_data['comment_type']  ) {
+	} elseif ( empty( $comment_data['comment_type'] ) || ! in_array( $comment_data['comment_type'], array( 'trackback', 'pingback' ), true ) ) {
 		$incoming_url = wp_parse_url( wp_get_referer(), PHP_URL_HOST );
 		$site_url     = wp_parse_url( get_site_url(), PHP_URL_HOST );
 
