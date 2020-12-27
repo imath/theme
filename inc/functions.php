@@ -929,6 +929,7 @@ add_action( 'pre_get_posts', 'theme_tuttogut_reverse_order', 10, 1 );
  * Check the reCaptcha score before inserting the comment.
  *
  * @since 1.1.0
+ * @since 1.1.1 Make sure only track/pingbacks can come from other sites.
  *
  * @param array $comment_data The comment data.
  * @param array The comment data.

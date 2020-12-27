@@ -2,10 +2,10 @@
 # This file is distributed under the GNU General Public License v2 or later.=!>
 msgid ""
 msgstr ""
-"Project-Id-Version: Thème 1.1.0\n"
+"Project-Id-Version: Thème 1.1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/imath/theme/issues\n"
-"POT-Creation-Date: 2020-11-04 11:59:00+00:00\n"
-"PO-Revision-Date: 2020-11-04 13:00+0100\n"
+"POT-Creation-Date: 2020-12-27 10:34:40+00:00\n"
+"PO-Revision-Date: 2020-12-27 11:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: USA <contact@imathi.eu>\n"
 "Language: en_US\n"
@@ -252,11 +252,11 @@ msgstr ""
 "This post is used to customize the Database connexion error’s page "
 "appearance."
 
-#: inc/functions.php:966
+#: inc/functions.php:974
 msgid "La vérification de votre commentaire a échoué."
 msgstr "Comment verification failed."
 
-#: inc/functions.php:967
+#: inc/functions.php:975
 msgid ""
 "Assurez-vous que JavaScript soit bien activé sur votre navigateur avant se "
 "soumettre à nouveau votre commentaire. Si vous êtes un spammeur, merci de "
@@ -265,7 +265,7 @@ msgstr ""
 "Please, make sure JavaScript is enabled on your browser before submitting "
 "your comment again. If you are a spammer, please forget it!"
 
-#: inc/functions.php:968
+#: inc/functions.php:976
 msgid "Ouch!"
 msgstr "Ouch!"
 
