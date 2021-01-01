@@ -123,42 +123,52 @@ function theme_scripts() {
 		true
 	);
 
-	if ( is_singular() && comments_open() ) {
-		if ( ! is_user_logged_in() ) {
-			wp_enqueue_script(
-				'theme-recaptcha',
-				sprintf( 'https://www.google.com/recaptcha/api.js?onload=themeCommentonSubmit&render=%s', G_RECAPTCHA_KEY ),
-				'array',
-				3,
-				true
-			);
+	if ( is_singular() ) {
+		wp_enqueue_script(
+			'theme-responsive-embeds',
+			get_template_directory_uri() . "/js/responsive-embeds{$min}.js",
+			array(),
+			$t->version,
+			true
+		);
 
-			wp_add_inline_script(
-				'theme-recaptcha',
-				sprintf(
-					'( function() {
-						window.themeCommentonSubmit = function() {
-							grecaptcha.ready( function() {
-								grecaptcha.execute( \'%s\', {
-									action: \'submit\'
-								} ).then( function( token ) {
-									// Add the token to the "primary" form
-									var input = document.createElement( \'input\' );
-									input.setAttribute( \'type\', \'hidden\' );
-									input.setAttribute( \'name\', \'_themeCaptcha_v3_token\' );
-									input.setAttribute( \'value\', token );
-									document.getElementById( \'theme-comment-form\' ).appendChild( input );
+		if ( comments_open() ) {
+			if ( ! is_user_logged_in() ) {
+				wp_enqueue_script(
+					'theme-recaptcha',
+					sprintf( 'https://www.google.com/recaptcha/api.js?onload=themeCommentonSubmit&render=%s', G_RECAPTCHA_KEY ),
+					'array',
+					3,
+					true
+				);
+
+				wp_add_inline_script(
+					'theme-recaptcha',
+					sprintf(
+						'( function() {
+							window.themeCommentonSubmit = function() {
+								grecaptcha.ready( function() {
+									grecaptcha.execute( \'%s\', {
+										action: \'submit\'
+									} ).then( function( token ) {
+										// Add the token to the "primary" form
+										var input = document.createElement( \'input\' );
+										input.setAttribute( \'type\', \'hidden\' );
+										input.setAttribute( \'name\', \'_themeCaptcha_v3_token\' );
+										input.setAttribute( \'value\', token );
+										document.getElementById( \'theme-comment-form\' ).appendChild( input );
+									} );
 								} );
-							} );
-						}
-					} )();',
-					G_RECAPTCHA_KEY
-				)
-			);
-		}
+							}
+						} )();',
+						G_RECAPTCHA_KEY
+					)
+				);
+			}
 
-		if ( get_option( 'thread_comments' ) ) {
-			wp_enqueue_script( 'comment-reply' );
+			if ( get_option( 'thread_comments' ) ) {
+				wp_enqueue_script( 'comment-reply' );
+			}
 		}
 	}
 }
