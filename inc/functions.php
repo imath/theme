@@ -534,11 +534,11 @@ function theme_is_main_site() {
  * @return null|array       Null if not on front end.
  *                          An array containing a Maintenance Post otherwise.
  */
-function theme_maintenance_posts_pre_query( $return = null, WP_Query $wq ) {
+function theme_maintenance_posts_pre_query( $return, WP_Query $wq ) {
 	global $post;
 
 	if ( ! $wq->is_main_query() || true === $wq->get( 'suppress_filters' ) || is_admin() ) {
-		return $return;
+		return null;
 	}
 
 	// Set the queried object to avoid notices
