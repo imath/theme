@@ -1,5 +1,7 @@
 # Thème
 
+**Ce thème WP n'est plus maintenu et a été archivé.**
+
 _C'est mon thème !_
 
 ## Supports
